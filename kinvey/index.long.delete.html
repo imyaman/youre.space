@@ -1,0 +1,118 @@
+<!doctype html>
+<head>
+<meta charset="utf-8">
+<title>허니버터칩 - FoodGuide(가공식품 성분조회)</title>
+<meta name="description" content="My Baas App">
+<meta name="viewport" content="width=device-width">
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/underscore.js"></script>
+<script type="text/javascript" src="js/sktdevbaas-0.9.0.js"></script>
+</head>
+
+<body>
+<h1>FoodGuide</h1>
+<h2>허니버터칩</h2>
+<p>허니버터칩 설명: 원재료  a, b, c, d, e... 성분 1, 2, 3, 4...</p>
+<h3>댓글 목록(더보기 추가)</h3>
+
+<table id="commentsTable">
+  <thead><tr>  <td>comment</td> <td>name</td> <td>date</td> <td>option</td> </tr></thead>
+<tbody>
+
+</tbody>
+</table>
+
+<button id='more'>more</button> <br />
+<button id='write'>write</button>
+
+<script>
+
+var pgCount=5;
+var currentPage=0;
+
+$(document).ready(function() {
+    Baas.initialize("7dab9da0-9541-4c63-9c6a-452c02ba957a");
+    getCommentsList();
+});
+
+$('#more').click(function(){
+    getCommentsList();
+});
+
+$('#write').click(function(){
+    window.location.href = 'write.html';
+});
+
+function getCommentsList(){
+    var query = new Baas.Query('Comments');
+    query.skip(pgCount * currentPage);
+    query.limit(pgCount);
+    query.find({
+        success: drawCommentsTable,
+        error: drawCommentsError
+    });
+    currentPage++;
+}
+
+function drawCommentsTable(results){
+    $.each(results, function(index, value){
+        drawRow(value);
+    });
+}
+
+function drawRow(rowData) {
+    var row; 
+    var d = new Date(rowData.createdAt);
+    var mytime = d.toLocaleString();
+    row = $('<tr id='+ 't' + rowData.id +'>');
+    row.append($("<td>" + rowData.get('comment') + "</td>"));
+    row.append($("<td>" + rowData.get('name') + "</td>"));
+    row.append($("<td>" + mytime + "</td>"));
+    row.append($('<td><input type="button" class="delButton" id=' + 'b' + rowData.id + ' value="DEL"></td>'));
+    $("#commentsTable").append(row); 
+
+    $('#b'+rowData.id).click(function(item){
+        //alert(rowData.id);
+        var simplepw = prompt('Enter the password. The comment will be deleted.', '');
+        if(simplepw != null){
+          deleteComment(rowData.id);
+        }
+    });
+}
+
+function drawCommentsError(data){
+    var row = $("<tr />");
+    $("#commentsTable").append(row); 
+    row.append($("<td>-</td>"));
+    row.append($("<td>-</td>"));
+    row.append($("<td>-</td>"));
+    row.append($("<td>-</td>"));
+}
+
+function deleteComment(cid){
+    var Comment = Baas.Object.extend('Comments');
+    var row = new Comment;
+    row.set('objectId', cid);
+    row.destroy({
+        success: function(){
+            $('#t'+cid).remove(); 
+        },
+        error: function(){
+        } 
+    });
+}
+
+//function getSimplepw(cid, spw){
+//    var query = new Baas.Query('Comments');
+//    query.equalTo('objectId', cid);
+//    query.find({
+//        success: return($(this)[0].simplepw),
+//        error: alert('Unexpected error')
+//    });
+//}
+
+
+</script>
+
+</body>
+</html>

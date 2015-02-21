@@ -1,0 +1,64 @@
+<!doctype html>
+<head>
+<meta charset="utf-8">
+<title>허니버터칩 - FoodGuide(가공식품 성분조회)</title>
+<meta name="description" content="My Baas App">
+<meta name="viewport" content="width=device-width">
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/underscore.js"></script>
+<script type="text/javascript" src="js/sktdevbaas-0.9.0.js"></script>
+</head>
+
+<body>
+<h1>FoodGuide</h1>
+<h2>허니버터칩</h2>
+<h3>댓글 작성</h3>
+
+<form id="postComment">
+  Comment : <input type="text" id="comment"> <br/>
+  Name : <input type="text" id="name"> <br/>
+  PW : <input type="password" id="simplepw"> <br/>
+  <input type="button" id="btnSaveObject" value="save">
+</form>
+
+<button id="list">list</button>
+
+<script>
+
+$(document).ready(function() {
+    Baas.initialize("7dab9da0-9541-4c63-9c6a-452c02ba957a");
+});
+
+$("#btnSaveObject").click(function() {
+        var comment = $('#comment').val();
+        var name = $('#name').val();
+        var pw = $('#simplepw').val();
+
+        var Comment = new Baas.Object.extend("Comments");
+        var myComment = new Comment();
+        myComment.set("comment", comment);
+        myComment.set("name", name);
+        myComment.set("simplepw", pw);
+        myComment.save(null, {
+            success: alertSuccess,
+            error: alertError
+        });
+
+});
+
+function alertSuccess(data){
+  alert('Saved');
+}
+
+function alertError(data){
+  alert('Not saved');
+}
+
+$('#list').click(function(){
+    window.location.href='index.long.delete.html';
+});
+         
+</script>
+
+</body>
+</html>

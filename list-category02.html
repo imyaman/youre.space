@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+	<meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
+	<title>Foodguides</title>
+	<link type="text/css" rel="stylesheet" href="./src/css/demo.css" />
+	<link type="text/css" rel="stylesheet" href="./src/css/foodguides.css" /><!-- 추가 css -->
+	<link type="text/css" rel="stylesheet" href="./src/css/jquery.mmenu.css" />
+	<link type="text/css" rel="stylesheet" href="./src/css/extensions/jquery.mmenu.widescreen.css" media="all and (min-width: 900px)" />
+	<link type="text/css" rel="stylesheet" href="./src/css/extensions/jquery.mmenu.themes.css" media="all and (min-width: 900px)" />
+	<style type="text/css">
+		@media all and (min-width: 900px) {
+			html, body {
+				height: 100%;
+			}
+			#menu {
+				background: #eee;
+			}
+			#page {
+				border-left: 1px solid #ccc;
+				min-height: 100%;
+			}
+			/* hide open-button */
+			a[href="#menu"]
+			{
+				display: none !important;
+			}
+			
+			footer {display:none;}
+		}
+	</style>
+	<script type="text/javascript" src="./src/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="./src/js/jquery.mmenu.js"></script>
+	<script type="text/javascript" src="./src/js/jquery.bpopup.min.js"></script>
+	<script type="text/javascript" src="./src/js/common.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$('nav#menu').mmenu({
+				classes: 'mm-light'
+			});
+		});
+
+		function edit_pop() {
+			$('#edit_layer').bPopup();
+		};
+
+		function bookmark_pop() {
+			$('#bookmark_layer').bPopup();
+		};
+	</script>
+</head>
+	<body>
+		<div id="page">
+			<div id="header">
+				<a href="#menu"></a>
+				<h1>과자/시리얼</h1>
+			</div>
+			<div id="content">
+				<ul class="category_list">
+					<li><a href="#">맛밤</a></li>
+					<li><a href="#">빵류</a></li>
+					<li><a href="#">상온소세지</a></li>
+					<li><a href="#">수입과자</a></li>
+					<li><a href="#">스낵</a></li>
+					<li><a href="#">시리얼</a></li>
+					<li><a href="#">쌀/옥수수과자</a></li>
+					<li><a href="#">쿠키/비스킷</a></li>
+					<li><a href="#">파이/카스타드/소프트쿠키</a></li>
+				</ul>
+			</div>
+			<footer>
+				<button><span>검색</span></button><button><span>분류</span></button><button><span>화제</span></button><button><span>관심</span></button><button><span>설정</span></button>
+			</footer>
+
+
+			<nav id="menu">
+				<ul>
+					<li class="Selected"><a href=".html">검색</a></li>
+					<li><a href=".html">분류</a></li>
+					<li><a href=".html">화제</a></li>
+					<li><a href=".html">관심</a></li>
+					<li><a href=".html">설정</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<!--  edit layer -->
+		<div id="edit_layer" class="p_layer">
+			<h2>태그 편집</h2>
+			<p class="cont">저장한 검색조건은 관심 메뉴에서<br />볼 수 있습니다</p>
+			<input type="text" placeholder="안 먹을 것, 땅콩, 딸기, 둘째 두드러기">
+			<div class="btn_wrap">
+				<button class="cancel b-close"><span>취소</span></button> <button class="confirm"><span>저장</span></button>
+			</div>
+		</div>
+
+		<!--  bookmark layer -->
+		<div id="bookmark_layer" class="p_layer">
+			<h2>북마크 삭제</h2>
+			<p class="cont">
+				식품별로 메모를 저장하면 태그가 됩니다. 태그를 이용하면 기억하기 쉽고 나중에 찾아볼 때 유용합니다. 자신이 기록한 태그는 자신에게만 보입니다. 이런 태그를 기록해보세요. "짠 음식, 고혈압, 싫어, 둘째 아이 두드러기, 안 먹어, 맛있어, 엄마가 좋아하는 거, 이것보다 딸기쿠키"
+			</p>
+
+			<h2 class="nth2">북마크 수정</h2>
+			<p class="cont">북마크의 이름을 바꿀 수 있습니다.</p>
+			<div class="btn_wrap">
+				<button class="cancel b-close"><span>확인</span></button>
+			</div>
+		</div>
+	</body>
+        <script src="list-category02.js"></script>
+</html>

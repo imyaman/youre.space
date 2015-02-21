@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+<div data-role="page" id="mainpage">
+  <div data-role="header" data-position="fixed" data-theme="a">
+    <h1 id="">Javascript를 이용한 BaaS 예제</h1>
+  </div>
+  <div data-role="footer" data-position="fixed" data-theme="a">
+    <div data-role="navbar">
+      <ul>
+        <li><a data-icon="search">Search</a></li>
+        <li><a data-icon="grid">Category</a></li>
+        <li><a data-icon="check">Issues</a></li>
+        <li><a data-icon="star">Favorates</a></li>
+        <li><a data-icon="gear">Settings</a></li>
+      </ul>
+    </div><!-- /navbar -->
+  </div><!-- /footer -->
+
+  <div data-role="main" class="ui-content">
+    <h2>목록</h2>
+    <table data-role="table" class="ui-responsive">
+      <thead>
+        <tr><th>구분</th><th>단순조회</th> <th>조회+더보기</th> <th>쓰기</th> </tr>
+      </thead>
+      <tbody>
+      <tr><td><a href="http://baas.io" rel="external">baas.io</a></td>
+          <td><a href="baas.io" rel="external">go</a></td>
+          <td><a href="baas.io/index2.html" rel="external">go</a></td> 
+          <td><a href="baas.io/write.html" rel="external"></a>(작성 중)</td> 
+      </tr>
+      <tr><td><a href="http://parse.com">parse</a></td>
+          <td><a href="parse" rel="external">go</a></td>
+          <td><a href="parse/index2.html" rel="external"></a></td> 
+          <td><a href="parse/write.html" rel="external"></a></td> 
+      </tr>
+      <tr><td><a href="http://kinvey.com">kinvey</a></td>
+          <td><a href="kinvey" rel="external">go</a></td>
+          <td><a href="kinvey/index2.html" rel="external"></a></td> 
+          <td><a href="kinvey/write.html" rel="external"></a></td> 
+      </tr>
+      <tr><td><a href="http://azure.com">azure</a></td>
+          <td><a href="azure" rel="external">go</a></td>
+          <td><a href="azure/index2.html" rel="external"></a></td> 
+          <td><a href="azure/write.html" rel="external"></a></td> 
+      </tr>
+      <tr><td><a href="http://developer.sktelecom.com">T developers</a></td>
+          <td><a href="sktdevbaas" rel="external">go</a></td>
+          <td><a href="sktdevbaas/index2.html" rel="external">go</a></td> 
+          <td><a href="sktdevbaas/write.html" rel="external">go</a></td> 
+      </tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>baas.io</li>
+      <ul>
+        <li><a href="baas.io" rel="external">단순 조회</a></li>
+        <li><a href="baas.io" rel="external">단순 조회</a></li>
+      </ul>
+      <li><a href="parse" rel="external">Parse</a></li>
+      <li><a href="kinvey" rel="external">Kinvey</a></li>
+      <li><a href="azure" rel="external">Azure Mobile Services</a></li>
+      <li><a href="sktdevbaas" rel="external">T developers</a></li>
+    </ul>
+    <h2>설명</h2>
+    <p>우선 SKT의 T developers에서 제공하는 BaaS의 예시로 설명<br />
+    <a href="http://1drv.ms/1JOFZAu" rel="external">여기</a></p>
+    <p>소스코드를 보라</p>
+    <p>속도는 baas.io, sktdevbaas, parse, kinvey 순</p>
+    <p>편리함은 baas.io, parse, sktdevbaas, kinvey 순</p>
+    <p>Microsoft의 Azure Mobile Services는 신세계. 대단함.</p>
+
+    <script type="text/javascript" 
+        src="http://scr.nsmartad.com/admixer/admixer.js"></script>
+    <script type="text/javascript">
+        new admixer_ad({
+        admixer_key:"8ch8bwvi",
+        display_id:"admixer_display",
+        adsense_publisher_key:"ca-mb-pub-0000000000000000", //AdSense 사용시에만 필요
+        ad_change:true,  //default : true
+        test : false,    //default : false
+        test_display_id : "log"
+    });
+    </script>
+    <div id="admixer_display"></div>
+    <div id="log"></div>
+  </div>
+</div>
+</body>
+</html>

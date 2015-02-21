@@ -1,0 +1,78 @@
+<!doctype html>
+<head>
+<meta charset="utf-8">
+<title>My Baas App</title>
+<meta name="description" content="My Baas App">
+<meta name="viewport" content="width=device-width">
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/underscore.js"></script>
+<script type="text/javascript" src="js/sktdevbaas-0.9.0.js"></script>
+</head>
+
+<body>
+<h1>BaaS Test</h1>
+
+<table id="personDataTable">
+<thead><tr>  <td>comment</td> <td>name</td> <td>date</td>  </tr></thead>
+<tbody>
+
+</tbody>
+</table>
+
+<button id='more'>more</button>
+
+<script>
+
+var pgCount=5;
+var currentPage=0;
+
+$(document).ready(function() {
+    Baas.initialize("7dab9da0-9541-4c63-9c6a-452c02ba957a");
+    doQuery();
+});
+
+$('#more').click(function(){
+    doQuery();
+//    $(this).prop('disabled', true);
+});
+
+function doQuery(){
+    var query = new Baas.Query("sellers");
+    query.skip(pgCount * currentPage);
+    query.limit(pgCount);
+    query.find({
+        success: drawSellerTable,
+        error: drawSellerError
+    });
+
+    currentPage++;
+}
+
+function drawSellerTable(data){
+    var obj = $.parseJSON(JSON.stringify(data));
+    Baas._log(JSON.stringify(data));
+    $.each(obj, function(i, item){
+        drawRow(item);
+    });
+}
+
+function drawRow(rowData) {
+    var row = $("<tr />");
+    $("#personDataTable").append(row); 
+    row.append($("<td>" + rowData.comment + "</td>"));
+    row.append($("<td>" + rowData.name + "</td>"));
+    row.append($("<td>" + rowData.createdAt + "</td>"));
+}
+
+function drawSellerError(data){
+    var row = $("<tr />");
+    $("#personDataTable").append(row); 
+    row.append($("<td>-</td>"));
+    row.append($("<td>-</td>"));
+    row.append($("<td>-</td>"));
+}
+         
+</script>
+
+</body>
+</html>

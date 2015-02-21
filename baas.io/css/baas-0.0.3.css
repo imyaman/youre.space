@@ -1,0 +1,92 @@
+/* --------
+	The CSS rules offered here are just an example. You can style the 'accordion' in any way you like.
+	The styles for the Page Structure are needed just for the purpose of this demo page.
+	If you decide to use the CSS rules in 'Accordion' (see below) as a base, 
+	be sure to rename the selectors as to satisfy the elements in your site.
+ --------- */
+* {margin:0; padding:0}
+/* --- Page Structure	--- */
+html {height:100%}
+body {
+	min-width:480px;
+	width:100%;
+	background:#fff;
+	color:#333;
+	font:76%/1.6 verdana,geneva,lucida,'lucida grande',arial,helvetica,sans-serif;
+}
+#wrapper{
+	margin-bottom:30px;
+	padding:10px 10px 0px 10px;
+	border-top:0.1em solid #ccc;
+	background:#fff;
+	text-align:left;
+	overflow:hidden
+}
+#container {
+	float:left;
+	width:100%;
+	margin-right:-19em;
+	padding:0 0 1em;
+	position:relative;
+	min-height:0
+}
+#main{
+	/*margin-right:30em;*/
+	width: 50%;
+	position:relative; 
+	min-height:0;
+	float: left;
+}
+.side{
+	float:right;
+	display:inline;
+	width:50%;
+	padding-bottom:1.3em;
+	position:relative;
+	overflow:hidden
+}
+p {margin: 0 10px 1em}
+.strong{font-weight:700}
+.clear {clear:both}
+img{border:0 none}
+
+/* --- Headings --- */
+h1 {font-family:georgia,'times new roman',times,serif; font-size:2.5em; font-weight:normal; color:#f60}
+h1, h2, h3 {margin-bottom:1em}
+h2, h3, h4 a, h5 a {padding:3px 10px}
+h2, h3, h4, h5 {font-size:1em}
+#main h2 {background-color:#f0f0f0}
+
+/* --- Links --- */
+a {padding:1px; border:1px solid #e0e0e0; color:#05b}
+a:hover, a:focus, a:active {border-color:#bcd; text-decoration:none; outline:0 none}
+/* --- Accordion --- */
+.js #main .accordion {visibility:hidden}
+.accordion {margin:0; padding:0 10px}
+.accordion li {list-style-type:none}
+.accordion li.last-child {margin-left:19px; list-style-type:disc}
+.accordion .outer {border:1px solid #dadada; border-width:0 1px 1px; background: #fff}
+.accordion .inner {margin-bottom:0; padding:.5em 20px 1em; position:relative; overflow:hidden}
+.accordion .inner .inner {padding-bottom:0}
+.accordion .h {padding-top:.3em} /* vertical padding instead of vertical margin (ie8) */
+.accordion p {margin:.5em 1px 1em}
+
+/*	
+	Add styles for all links in the 'accordion':
+.accordion a {...}
+*/		
+a.trigger {display:block; padding-left:20px; background-color: yellow; background-repeat: no-repeat; background-position: 1px 50%;	font-weight:700}
+a.trigger.open {background-color: green;}
+.last-child a.trigger{padding-left:1px; background-image:none; font-weight:normal}
+#main a.trigger {background-color:#f0f0f0}
+#main a.trigger.open {border-color:#dadada; background-color:#e7e7e7}
+#main a:hover.trigger.open, #main a:focus.trigger.open, #main a:active.trigger.open {border-color:#bcd}
+.sourceCode {font-size: 1.3em; display: none;}
+
+pre {
+	white-space: pre-wrap;       /* css-3 */
+	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+	white-space: -pre-wrap;      /* Opera 4-6 */
+	white-space: -o-pre-wrap;    /* Opera 7 */
+	word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}

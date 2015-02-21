@@ -1,0 +1,73 @@
+<!doctype html>
+<head>
+<meta charset="utf-8">
+<title>허니버터칩 - FoodGuide(가공식품 성분조회)</title>
+<meta name="description" content="My Baas App">
+<meta name="viewport" content="width=device-width">
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/underscore.js"></script>
+<script type="text/javascript" src="js/sktdevbaas-0.9.0.js"></script>
+</head>
+
+<body>
+<h1>FoodGuide</h1>
+<h2>허니버터칩</h2>
+<p>허니버터칩 설명: 원재료  a, b, c, d, e... 성분 1, 2, 3, 4...</p>
+<h3>댓글 목록(목록만)</h3>
+
+<table id="personDataTable">
+<thead><tr>  <td>comment</td> <td>name</td> <td>date</td>  </tr></thead>
+<tbody>
+
+</tbody>
+</table>
+
+<span id="paste"></span>
+
+
+<script>
+//function sampleSuccess(result) {
+//    Baas._log("BaaS success", arguments);
+//}
+//
+//function sampleError(result) {
+//    Baas._log("BaaS error", arguments);
+//}
+
+$(document).ready(function() {
+    Baas.initialize("7dab9da0-9541-4c63-9c6a-452c02ba957a");
+
+    var query = new Baas.Query("sellers");
+    query.limit(10);
+    query.find({
+        success: drawSellerTable,
+        error: drawSellerError
+    });
+});
+
+function drawSellerTable(results){
+    $.each(results, function(index, value){
+        drawRow(value);
+    });
+}
+
+function drawRow(rowData) {
+    var row = $("<tr />");
+    $("#personDataTable").append(row); 
+    row.append($("<td>" + rowData.get('comment') + "</td>"));
+    row.append($("<td>" + rowData.get('name') + "</td>"));
+    row.append($("<td>" + rowData.createdAt + "</td>"));
+}
+
+function drawSellerError(data){
+    var row = $("<tr />");
+    $("#personDataTable").append(row); 
+    row.append($("<td>-</td>"));
+    row.append($("<td>-</td>"));
+    row.append($("<td>-</td>"));
+}
+         
+</script>
+
+</body>
+</html>

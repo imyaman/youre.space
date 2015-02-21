@@ -1,0 +1,57 @@
+<!doctype html>
+<head>
+<meta charset="utf-8">
+<title>오늘의 좋은 말 - 블로그</title>
+<meta name="description" content="오늘의 좋은 말을 이야기 하는 블로그입니다. 댓글을 작성해봅시다.">
+<meta name="viewport" content="width=device-width">
+        <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"></script><![endif]-->
+</head>
+
+<body>
+<h1>오늘의 좋은 말 - azure</h1>
+<h2>able</h2>
+<p>가능하다는 생각만으로도 기분이 좋아집니다. 이 부분은 블로그 본문입니다. 아래 댓글 목록이 표시됩니다. 더 보기, 삭제 없이 단순히 최신 댓글 몇개를 가져옵니다.</p>
+<h3>댓글 목록</h3>
+
+<table id="commentsTable">
+<thead><tr>  <td>comment</td> <td>name</td> <td>date</td>  </tr></thead>
+<tbody>
+</tbody>
+</table>
+
+</body>
+<script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.1.min.js'></script>
+<script src='http://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.2.5.min.js'></script>
+<script>
+
+$(function(){
+    var client = new WindowsAzure.MobileServiceClient('https://nextlayer.azure-mobile.net/', 'tIBCRAuvMqKAojuCYMmbqUdLzKSrNw70');
+    var commentsItemTable = client.getTable('Comments');
+    commentsItemTable.systemProperties = WindowsAzure.MobileServiceTable.SystemProperties.All;
+
+    //commentsItemTable.insert({ comment: 'Hey, Storm. ', name: 'Cyclops'}).then(function(result){});
+
+    var query = commentsItemTable.where({  });
+    query.read().then(function(commentsItems) {
+        var listItems = $.map(commentsItems, function(item){
+            var d = new Date(item.__createdAt);
+            var mytime = d.toLocaleString();
+            console.log(item.comment);
+            return $('<tr>').append($('<td>' + item.comment + '</td>'))
+                .append($('<td>' + item.name + '</td>'))
+                .append($('<td>' + mytime + '</td>'));
+        });
+        console.log(listItems.toString());
+        $('#commentsTable').empty().append(listItems).toggle(listItems.length > 0);
+
+    }, handleError);
+});
+
+function handleError(error) {
+    var text = error + (error.request ? ' - ' + error.request.status : '');
+    $('#errorlog').append($('<li>').text(text));
+}
+
+</script>
+
+</html>

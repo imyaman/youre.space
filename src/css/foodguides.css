@@ -1,0 +1,74 @@
+/* @charset "utf-8"; */
+
+@import url("jin.css");
+
+/* common*/
+body,h1, h2,h3, h4, h5, h6{padding:0;margin:0}
+div,p{padding:0;margin:0;font-size:13px}
+fieldset,img {border:0;padding:0;margin:0;}
+legend span {position:absolute;left:-99999px;}
+ul, li{padding:0;margin:0;list-style:none}
+table{width:100%;border-collapse:collapse;border-spacing:0;table-layout:fixed}
+caption strong, caption details{position:absolute;left:-9999px;}
+a, a:link, a:active, a:visited, a:hover{text-decoration:none}
+
+/* layout */
+#header a.back{background:url('../img/btn_back.png') no-repeat left top}
+#header h1{text-align:center;line-height:40px;font-weight:bold;font-size:16px;color:#fff}
+footer {position:fixed;bottom:0;width:100%;height:50px;color:#fff;text-align:center;background:#555;}
+footer  button {width:50px;height:50px;color:#000;background:#fff;border:1px solid #000;border-left:none;box-sizing:border-box;}
+footer  button:first-child {border-left:1px solid #000;}
+
+/* content */
+#content{min-width:;margin-bottom:60px;}
+#content h2{display:inline-block;font-size:13px}
+.option{display:none}
+.srch_form{margin:0 0 20px 0}
+.srch_form .srch_txt{position:relative;display:block;min-width:195px;padding:10px;border:1px solid #ebebeb;border-radius:3px;background:#fff}
+.food_list{display:table;width:100%;margin:0 0 10px 0;table-layout:fixed}
+.food_list img{width:75px;height:65px;padding:4px 0 0;vertical-align:top}
+.food_list .img{display:table-cell;width:75px}
+.food_list .txt{display:table-cell;width:100%;padding:0 0 0 10px}
+.food_list .txt strong{display:block;min-width:195px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.food_list .txt span{display:block;min-width:195px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.imgform{margin:0 0 20px 0px;text-align:center}
+.imgform img{width:150px;height:112px}
+.tagform{position:relative;display:table;width:100%;margin:0 0 20px 0;table-layout:fixed}
+.tagform strong{display:table-cell;width:70px} 
+.tagform a.txt{display:table-cell;width:100%} 
+.tagform strong a.help{display:inline-block;width:13px;height:13px}
+.tagform a.edit{position:absolute;top:0;right:0;width:22px;height:22px;background:url('../img/edit.gif') no-repeat center}
+.info{position:relative;margin:0 0 20px 0}
+.info span{position:absolute;right:0;top:0}
+.detail{margin:0 0 20px 0}
+.notice{margin:0 0 20px 0}
+.category_list li{margin:0 0 20px 0;font-size:16px;background:url('../img/btn_link.gif') no-repeat right}
+.category_list li a{display:block}
+
+
+/* table */
+table{/* border-top:solid 1px #ddd;border-left:solid 1px #ddd */}
+table tr th{/* padding:5px;border-right:solid 1px #ddd;border-bottom:solid 1px #ddd;background:#eee; */text-align:left;vertical-align:top;}
+table tr td{/* padding:5px;border-right:solid 1px #ddd;border-bottom:solid 1px #ddd;background:#fff */}
+
+/* style */
+.comment1{display:inline;padding:3px 0;font-size:12px;color:#ff0000}
+.comment2{display:inline-block;padding:0 5px}
+
+/* form 서식 */
+input[type=text]{width:100%;height:30px;padding:0 10px;border:1px solid #ebebeb;border-radius:3px;box-sizing:border-box}
+select{width:100%;height:30px;border:1px solid #ebebeb;border-radius:3px;box-sizing:border-box}
+.formgroup {display:table;width:100%;margin-bottom:20px}
+.formgroup label {display:table-cell;width:100px;letter-spacing:-1px;border-radius:3px}
+.formgroup input[type=text]{display:table-cell;width:100%;height:30px;padding:0 10px;border:1px solid #ebebeb;border-radius:3px;box-sizing:border-box}
+.formgroup input[type=password] {display:table-cell;width:100%;height:30px;padding:0 10px;border:1px solid #ebebeb;border-radius:3px;box-sizing:border-box}
+.formgroup input.ip_sty01{width:30%;padding:0 5px;margin:0 5px 0 0;text-align:right}
+.formgroup select{width:30%;margin:0 5px 0 0}
+
+/* 버튼 */
+button{margin:0;padding:0;border:0;cursor:pointer}
+button span{position:relative;display:block;margin:0;padding:0}
+.btn_wrap{padding:20px 0 0;text-align:center}
+.btn_search{display:inline-block}
+.btn_find{width:80px;height:30px;color:#ffffff;background:#555555;border:1px solid #ebebeb;border-radius:3px;box-sizing:border-box}
+.btn_save{width:100px;height:30px;color:#ffffff;background:#555555;border:1px solid #ebebeb;border-radius:3px;box-sizing:border-box}
