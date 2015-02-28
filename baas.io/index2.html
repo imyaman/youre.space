@@ -27,6 +27,7 @@
 var io;
 var options;
 var cursor;
+var cursoroccur;
 
 io = new Baas.IO({
     'URI':'https://api.baas.io',
@@ -51,21 +52,39 @@ $(document).ready(function() {
 
 
 function getCommentsList(){
+    console.log(cursor);
     if(cursor){
-    options = {
-        'client':io,
-        'endpoint':'comments',
-        'qs':{
-            'ql':'order by created desc',
-            'limit':'5'
-        }
-    };
-
+        options = {
+            'client':io,
+            'endpoint':'comments',
+            'qs':{
+                'ql':'order by created desc',
+                'cursor':cursor,
+                'limit':'5'
+            }
+        };
+    }else{
+        if(cursoroccur==1){ return; }
+        options = {
+            'client':io,
+            'endpoint':'comments',
+            'qs':{
+                'ql':'order by created desc',
+                'limit':'5'
+            }
+        };
     }
 
     io.request(options, function (err, data) {
         if(!err){
             drawCommentsTable(data.entities);
+            if(data.cursor){
+                console.log(cursor);
+                cursor=data.cursor;
+                cursoroccur=1;
+            }else{
+                cursor='';
+            }
         }else{
             console.log('query error');
             console.log(err.error_description.toString());
