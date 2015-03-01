@@ -56,7 +56,7 @@ BaaS 초기화 -> query 객체를 생성 -> query 객체의 프로퍼티(받아�
     <meta name="viewport" content="width=device-width"> 
     <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script> 
     <script type="text/javascript" src="js/underscore.js"></script> 
-    <script type="text/javascript" src="js/baas-1.1.0.js"></script> 
+    <script type="text/javascript" src="js/sktdevbaas-0.9.0.js"></script> 
 </head> 
 <body> 
     <h1>BaaS Test</h1> 
