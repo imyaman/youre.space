@@ -47,7 +47,7 @@ BaaS 초기화 -> query 객체를 생성 -> query 객체의 프로퍼티(받아�
 
 
 ==== ==== index.html ==== ==== 
-
+```
 <!doctype html> 
 <head> 
 <meta charset="utf-8"> 
@@ -74,11 +74,11 @@ BaaS 초기화 -> query 객체를 생성 -> query 객체의 프로퍼티(받아�
 <!-- 여기에 script --> 
 </body> 
 </html> 
-
+```
 
 
 ==== ==== list.js ==== ==== 
-
+```
 <script> 
 $(document).ready(function() { 
 // BaaS에 접속하기 위한 초기화. 이 한 줄 만으로 모든 것이 알아서 준비된다. 
@@ -113,7 +113,7 @@ row.append($("<td>-</td>"));
 row.append($("<td>-</td>")); 
 } 
 </script> 
-
+```
 ==== ==== ==== 
 
 # 댓글 쓰기 
@@ -121,6 +121,7 @@ row.append($("<td>-</td>"));
 BaaS 초기화 -> comments collection에 들어갈 entity를 생성 -> entity의 프로퍼티(코멘트 내용, 작성자, 비밀번호)를 설정 -> entity를 commends collection에 저장 -> 실행 결과를 받아와 성공/실패를 구분하여 후처리 
 
 ==== ==== write.html ==== ==== 
+```
 <!doctype html> 
 <head> 
 <meta charset="utf-8"> 
@@ -171,11 +172,15 @@ alert('Not saved');
 $('#list').click(function(){ 
 window.location.href='index.long.delete.html'; 
 }); 
-</script> 
+</script>
+```
+
 ==== ==== index.html ==== ==== 
+```
 ... 
 <button id='write'>write</button> <!-- 목록 화면에 댓글 쓰기 버튼 추가 --> 
 ... 
+```
 
 # 더 보기 및 댓글 삭제 버튼 
 댓글 삭제 화면은 이렇게 보여진다 [스크린샷] 
@@ -191,6 +196,7 @@ BaaS는 기본으로 collection으로부터 10개의 항목을 받아온다. 한
 
 
 ==== ==== index.html ==== ==== 
+```
 ... 
 <table id="personDataTable"> 
 <thead> 
@@ -205,7 +211,10 @@ BaaS는 기본으로 collection으로부터 10개의 항목을 받아온다. 한
 </tbody> 
 </table> 
 ... 
+```
+
 ==== ==== list.js ==== ==== 
+```
 <script> 
 var pgCount=5; 
 var currentPage=0; 
@@ -229,6 +238,7 @@ currentPage++;
 } 
 ... 
 </script> 
+```
 ==== ==== ==== ==== 
 
 # 댓글 삭제 처리 
