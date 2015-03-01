@@ -50,27 +50,27 @@ BaaS 초기화 -> query 객체를 생성 -> query 객체의 프로퍼티(받아�
 ```
 <!doctype html> 
 <head> 
-<meta charset="utf-8"> 
-<title>My Baas App</title> 
-<meta name="description" content="My Baas App"> 
-<meta name="viewport" content="width=device-width"> 
-<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script> 
-<script type="text/javascript" src="js/underscore.js"></script> 
-<script type="text/javascript" src="js/baas-1.1.0.js"></script> 
+    <meta charset="utf-8"> 
+    <title>My Baas App</title> 
+    <meta name="description" content="My Baas App"> 
+    <meta name="viewport" content="width=device-width"> 
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script> 
+    <script type="text/javascript" src="js/underscore.js"></script> 
+    <script type="text/javascript" src="js/baas-1.1.0.js"></script> 
 </head> 
 <body> 
-<h1>BaaS Test</h1> 
-<table id="personDataTable"> 
-<thead> 
-<tr>   
-<td>comment</td> 
-<td>name</td>  
-<td>date</td>  
-</tr> 
-</thead> 
-<tbody> 
-</tbody> 
-</table> 
+    <h1>BaaS Test</h1> 
+    <table id="personDataTable"> 
+        <thead> 
+            <tr>     
+                <td>comment</td> 
+                <td>name</td>    
+                <td>date</td>    
+            </tr> 
+        </thead> 
+        <tbody> 
+        </tbody> 
+    </table> 
 <!-- 여기에 script --> 
 </body> 
 </html> 
@@ -81,36 +81,40 @@ BaaS 초기화 -> query 객체를 생성 -> query 객체의 프로퍼티(받아�
 ```
 <script> 
 $(document).ready(function() { 
-// BaaS에 접속하기 위한 초기화. 이 한 줄 만으로 모든 것이 알아서 준비된다. 
-// T developers 웹 사이트에서 확인한 key를 인자로 넣는다. 
-Baas.initialize("7dab9da0-9541-4c63-9c6a-452c02ba957a"); 
-var query = new Baas.Query("sellers"); 
-query.limit(10); 
-query.find({ 
-success: drawSellerTable, 
-error: drawSellerError 
+    // BaaS에 접속하기 위한 초기화. 이 한 줄 만으로 모든 것이 알아서 준비된다. 
+    // T developers 웹 사이트에서 확인한 key를 인자로 넣는다. 
+    Baas.initialize("7dab9da0-9541-4c63-9c6a-452c02ba957a"); 
+
+    var query = new Baas.Query("sellers"); 
+    query.limit(10); 
+    query.find({ 
+        success: drawSellerTable, 
+        error: drawSellerError 
+    }); 
 }); 
-}); 
+
 function drawSellerTable(data){ 
-var obj = $.parseJSON(JSON.stringify(data)); 
-Baas._log(JSON.stringify(data)); 
-$.each(obj, function(i, item){ 
-drawRow(item); 
-}); 
+    var obj = $.parseJSON(JSON.stringify(data)); 
+    Baas._log(JSON.stringify(data)); 
+    $.each(obj, function(i, item){ 
+        drawRow(item); 
+    }); 
 } 
+
 function drawRow(rowData) { 
-var row = $("<tr />"); 
-$("#personDataTable").append(row);  
-row.append($("<td>" + rowData.comment + "</td>")); 
-row.append($("<td>" + rowData.name + "</td>")); 
-row.append($("<td>" + rowData.createdAt + "</td>")); 
+    var row = $("<tr />"); 
+    $("#personDataTable").append(row);  
+    row.append($("<td>" + rowData.comment + "</td>")); 
+    row.append($("<td>" + rowData.name + "</td>")); 
+    row.append($("<td>" + rowData.createdAt + "</td>")); 
 } 
+
 function drawSellerError(data){ 
-var row = $("<tr />"); 
-$("#personDataTable").append(row);  
-row.append($("<td>-</td>")); 
-row.append($("<td>-</td>")); 
-row.append($("<td>-</td>")); 
+    var row = $("<tr />"); 
+    $("#personDataTable").append(row);  
+    row.append($("<td>-</td>")); 
+    row.append($("<td>-</td>")); 
+    row.append($("<td>-</td>")); 
 } 
 </script> 
 ```
@@ -124,53 +128,61 @@ BaaS 초기화 -> comments collection에 들어갈 entity를 생성 -> entity의
 ```
 <!doctype html> 
 <head> 
-<meta charset="utf-8"> 
-<title>My Baas App</title> 
-<meta name="description" content="My Baas App"> 
-<meta name="viewport" content="width=device-width"> 
-<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script> 
-<script type="text/javascript" src="js/underscore.js"></script> 
-<script type="text/javascript" src="js/baas-1.1.0.js"></script> 
+    <meta charset="utf-8"> 
+    <title>My Baas App</title> 
+    <meta name="description" content="My Baas App"> 
+    <meta name="viewport" content="width=device-width"> 
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script> 
+    <script type="text/javascript" src="js/underscore.js"></script> 
+    <script type="text/javascript" src="js/baas-1.1.0.js"></script> 
 </head> 
 <body> 
-<h1>BaaS Test</h1> 
-<form id="postComment"> 
-Comment : <input type="text" id="comment"> <br/> 
-Name : <input type="text" id="name"> <br/> 
-PW : <input type="password" id="simplepw"> <br/> 
-<input type="button" id="btnSaveObject" value="save"> 
-</form> 
-<button id="list">list</button> 
+    <h1>BaaS Test</h1> 
+    <form id="postComment"> 
+        Comment : <input type="text" id="comment"> <br/> 
+        Name : <input type="text" id="name"> <br/> 
+        PW : <input type="password" id="simplepw"> <br/> 
+        <input type="button" id="btnSaveObject" value="save"> 
+    </form> 
+    <button id="list">list</button> 
 <!-- 여기에 script --> 
 </body> 
 </html> 
+```
+
 ==== ==== write.js ==== ==== 
+```
 <script> 
 $(document).ready(function() { 
-Baas.initialize("7dab9da0-9541-4c63-9c6a-452c02ba957a"); 
+    Baas.initialize("7dab9da0-9541-4c63-9c6a-452c02ba957a"); 
 }); 
+
 $("#btnSaveObject").click(function() { 
-var comment = $('#comment').val(); 
-var name = $('#name').val(); 
-var pw = $('#simplepw').val(); 
-var Comment = new Baas.Object.extend("sellers"); 
-var myComment = new Comment(); 
-myComment.set("comment", comment); 
-myComment.set("name", name); 
-myComment.set("simplepw", pw); 
-myComment.save(null, { 
-success: alertSuccess, 
-error: alertError 
+    var comment = $('#comment').val(); 
+    var name = $('#name').val(); 
+    var pw = $('#simplepw').val(); 
+
+    var Comment = new Baas.Object.extend("sellers"); 
+    var myComment = new Comment(); 
+    myComment.set("comment", comment); 
+    myComment.set("name", name); 
+    myComment.set("simplepw", pw); 
+    myComment.save(null, { 
+        success: alertSuccess, 
+        error: alertError 
+    }); 
 }); 
-}); 
+
 function alertSuccess(data){ 
-alert('Saved'); 
+    alert('Saved'); 
 } 
+
 function alertError(data){ 
-alert('Not saved'); 
+    alert('Not saved'); 
 } 
+
 $('#list').click(function(){ 
-window.location.href='index.long.delete.html'; 
+    window.location.href='index.long.delete.html'; 
 }); 
 </script>
 ```
@@ -178,7 +190,7 @@ window.location.href='index.long.delete.html';
 ==== ==== index.html ==== ==== 
 ```
 ... 
-<button id='write'>write</button> <!-- 목록 화면에 댓글 쓰기 버튼 추가 --> 
+    <button id='write'>write</button> <!-- 목록 화면에 댓글 쓰기 버튼 추가 --> 
 ... 
 ```
 
@@ -199,16 +211,16 @@ BaaS는 기본으로 collection으로부터 10개의 항목을 받아온다. 한
 ```
 ... 
 <table id="personDataTable"> 
-<thead> 
-<tr>   
-<td>comment</td> 
-<td>name</td>  
-<td>date</td>  
-<td>option</td> <!-- 삭제 버튼을 넣을 컬럼을 추가함 --> 
-</tr> 
-</thead> 
-<tbody> 
-</tbody> 
+    <thead> 
+        <tr>   
+            <td>comment</td> 
+            <td>name</td>  
+            <td>date</td>  
+            <td>option</td> <!-- 삭제 버튼을 넣을 컬럼을 추가함 --> 
+        </tr> 
+    </thead> 
+    <tbody> 
+    </tbody> 
 </table> 
 ... 
 ```
@@ -218,23 +230,26 @@ BaaS는 기본으로 collection으로부터 10개의 항목을 받아온다. 한
 <script> 
 var pgCount=5; 
 var currentPage=0; 
+
 $(document).ready(function() { 
-Baas.initialize("7dab9da0-9541-4c63-9c6a-452c02ba957a"); 
-doQuery(); 
-}); 
-$('#more').click(function(){ 
-doQuery(); 
-}); 
-function doQuery(){ 
-var query = new Baas.Query("sellers"); 
-query.skip(pgCount * currentPage); 
-query.limit(pgCount); 
-query.find({ 
-success: drawSellerTable, 
-error: drawSellerError 
+    Baas.initialize("7dab9da0-9541-4c63-9c6a-452c02ba957a"); 
+    doQuery(); 
 }); 
 
-currentPage++; 
+$('#more').click(function(){ 
+    doQuery(); 
+}); 
+
+function doQuery(){ 
+    var query = new Baas.Query("sellers"); 
+    query.skip(pgCount * currentPage); 
+    query.limit(pgCount); 
+    query.find({ 
+        success: drawSellerTable, 
+        error: drawSellerError 
+    }); 
+
+    currentPage++; 
 } 
 ... 
 </script> 
@@ -250,4 +265,4 @@ currentPage++;
 jquery mobile을 이용하여 보기좋게 꾸밈 
 
 # 맺음말 
-이렇게 BaaS를 이용하여 댓글 기능을 구현해보았다. 이 예제는 http://nextlayer.nl/sktdevbaas/ 에서 확인할 수 있다. 소스코드는 http://nextlayer.nl/sktdevbaas/comment.zip 에서 다운로드 받을 수 있다. 
+이렇게 BaaS를 이용하여 댓글 기능을 구현해보았다. 이 예제는 http://nextlayer.nl/sktdevbaas/ 에서 확인할 수 있다. 소스코드는 http://nextlayer.nl/sktdevbaas/comment.zip 또는 github에서 다운로드 받을 수 있다. 
