@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>Javascript BaaS Example</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
     <link href='http://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -18,54 +17,63 @@
   <div data-role="header" data-position="fixed" data-theme="a">
     <h1 id="">Javascript를 이용한 BaaS 예제</h1>
   </div>
-  <div data-role="footer" data-position="fixed" data-theme="a">
-    <div data-role="navbar">
-      <ul>
-        <li><a data-icon="search" href="http://17kesamet.blog.youre.space" rel=external>Search</a></li>
-        <li><a data-icon="grid" href="http://mojolicious.blog.youre.space" rel=external>Category</a></li>
-        <li><a data-icon="check" href="http://dancer.blog.youre.space" rel=external>Issues</a></li>
-        <li><a data-icon="star" href="http://youre.space/blog" rel=external>Blog</a></li>
-        <li><a data-icon="gear" href="http://heroku.blog.youre.space" rel=external>Settings</a></li>
-      </ul>
-    </div><!-- /navbar -->
-  </div><!-- /footer -->
 
   <div data-role="main" class="ui-content">
-    <h2>kt baas.io 예제</h2>
+	  <h2>이게 뭔가요?</h2>
+	  <p>BaaS(Backend as a Service)를 잘 쓰자는 취지에서 javascript 예제를 만들어보았습니다. 초보자를 위해 가능한 단순하게 만들었습니다.</p>
+
+	  <h2><a href="https://api02.youre.space/svr42mp/baas.io/users">youre.space usergrid</a> 예제</h2>
+	  <!--
+	  <div class="main_banner" id="main_banner2">
+		  <script type="text/javascript">
+			  var tad_conf = {
+				  targetId : 'main_banner2',
+				  clientId : 'MX0005733',
+				  slotNo : 2,
+				  adType : 'inline',
+				  test : false,
+				  newWindow : false
+			  };
+		  </script>
+		  <script type="text/javascript" src="http://adddn.adotsolution.com/contents/sdk/js/tad.min.js"></script>
+	  </div>
+	  -->
     <ul>
-    <li><a href="http://baas.io" rel="external">baas.io</a>
+    <li><a href="usergrid" rel="external">단순조회</a>
+    <li><a href="usergrid/index2.html" rel="external">조회+더보기</a></li>
+    <li><a href="usergrid/write.html" rel="external">쓰기</a></li>
+    </ul>
+
+	<h2>kt <a href="http://baas.io">baas.io</a> 예제</h2>
+    <ul>
     <li><a href="baas.io" rel="external">단순조회</a>
     <li><a href="baas.io/index2.html" rel="external">조회+더보기</a></li>
     <li><a href="baas.io/write.html" rel="external">쓰기</a></li>
     </ul>
 
-    <h2>Parse 예제</h2>
+	<h2><a href="http://parse.com">Parse</a> 예제</h2>
     <ul>
-    <li><a href="http://parse.com">parse</a></li>
     <li><a href="parse" rel="external">단순조회</a></li>
     <li><a href="parse/index2.html" rel="external"></a></li>
     <li><a href="parse/write.html" rel="external"></a></li>
     </ul>
 
-    <h2>Kinvey 예제</h2>
+	<h2><a href="http://kinvey.com">Kinvey</a> 예제</h2>
     <ul>
-    <li><a href="http://kinvey.com">kinvey</a></li>
     <li><a href="kinvey" rel="external">단순조회</a></li>
     <li><a href="kinvey/index2.html" rel="external"></a></li>
     <li><a href="kinvey/write.html" rel="external"></a></li> 
     </ul>
 
-    <h2>Microsoft Azure Mobile Services 예제</h2>
+	<h2>Microsoft <a href="http://azure.com">Azure Mobile Services</a> 예제</h2>
     <ul>
-    <li><a href="http://azure.com">azure</a></li>
     <li><a href="azure" rel="external">단순조회</a></li>
     <li><a href="azure/index2.html" rel="external"></a></li> 
     <li><a href="azure/write.html" rel="external"></a></li> 
     </ul>
 
-    <h2>T developers BaaS 예제</h2>
+	<h2>SKTelecom <a href="http://developer.sktelecom.com">T developers</a> BaaS 예제</h2>
     <ul>
-    <li><a href="http://developer.sktelecom.com">T developers</a></li>
     <li><a href="sktdevbaas" rel="external">단순조회</a></li>
     <li><a href="sktdevbaas/index2.html" rel="external">조회+더보기</a></li> 
     <li><a href="sktdevbaas/write.html" rel="external">쓰기</a></li> 
