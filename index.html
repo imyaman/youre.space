@@ -43,6 +43,35 @@
     <li><a href="usergrid/index2.html" rel="external">조회+더보기</a></li>
     <li><a href="usergrid/write.html" rel="external">쓰기</a></li>
     </ul>
+데이터를 조회하는 부분. usergrid와 baas.io는 서로 비슷합니다.
+    <pre class="prettyprint">
+&lt;script src="js/usergrid.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+$(document).ready(function() {
+    var client = new Usergrid.Client({
+        'URI':'https://api02.youre.space',
+        'orgName':'svr42mp', 
+        'appName':'baas.io',
+        //'token':baas_token
+    });
+
+    var options = {
+        'client':client,
+        'endpoint':'comments',
+        'qs':{
+            'ql':'order by created DESC'
+        }
+    }
+
+    client.request(options, function (err, data) {
+      if(!err){
+          drawCommentsTable(data.entities);
+      }else{
+          console.log(err.toString());
+      }
+    });
+}
+    </pre>
 
 	<h2>kt <a href="http://baas.io">baas.io</a> 예제</h2>
     <ul>
@@ -50,6 +79,28 @@
     <li><a href="baas.io/index2.html" rel="external">조회+더보기</a></li>
     <li><a href="baas.io/write.html" rel="external">쓰기</a></li>
     </ul>
+데이터를 조회하는 부분
+    <pre class="prettyprint">
+var io = new Baas.IO({
+  'URI':'https://api.baas.io',
+  'orgName':'imyaman',
+  'appName':'b-log',
+});
+
+var options = {
+  'client':io,
+  'endpoint':'comments',
+  'qs':{
+    'ql':'order by created DESC'
+  }
+}
+
+io.request(options, function (err, data) {
+ if(!err){
+ }else{
+ }
+});
+    </pre>
 
 	<h2><a href="http://parse.com">Parse</a> 예제</h2>
     <ul>
@@ -57,6 +108,15 @@
     <li><a href="parse/index2.html" rel="external"></a></li>
     <li><a href="parse/write.html" rel="external"></a></li>
     </ul>
+<pre class="prettyprint">
+Parse.initialize('cdzz7YuYMPaopERtDOd15bUvv7oSaFtJYkCNZjIg', 'cPEU1ggQqkfL1Uh2fPekOWsmrCs7xc39H6RKZRpr');
+var query = new Parse.Query('Comments');
+query.limit(10);
+query.find({
+  success: drawCommentsTable,
+  error: drawCommentsError
+});
+</pre>
 
 	<h2><a href="http://kinvey.com">Kinvey</a> 예제</h2>
     <ul>
@@ -64,6 +124,23 @@
     <li><a href="kinvey/index2.html" rel="external"></a></li>
     <li><a href="kinvey/write.html" rel="external"></a></li> 
     </ul>
+<pre class="prettyprint">
+var promise = Kinvey.init({
+  appKey : 'kid_WkVVFh1N5',
+  appSecret : '8ffb767dda014827bd9de4ea01df7a32'
+});
+promise.then(function(activeUser) {
+  if(null === activeUser) {
+    return Kinvey.User.create();
+  }
+}, function(error) {
+});
+
+var promise = Kinvey.DataStore.find('Comments', null, {
+  success : drawCommentsTable,
+  error : drawCommentsError
+});
+</pre>
 
 	<h2>Microsoft <a href="http://azure.com">Azure Mobile Services</a> 예제</h2>
     <ul>
@@ -71,6 +148,18 @@
     <li><a href="azure/index2.html" rel="external"></a></li> 
     <li><a href="azure/write.html" rel="external"></a></li> 
     </ul>
+<pre class="prettyprint">
+var client = new WindowsAzure.MobileServiceClient('https://nextlayer.azure-mobile.net/', 'tIBCRAuvMqKAojuCYMmbqUdLzKSrNw70');
+var commentsItemTable = client.getTable('Comments');
+commentsItemTable.systemProperties = WindowsAzure.MobileServiceTable.SystemProperties.All;
+
+var query = commentsItemTable.where({ });
+query.read().then(function(commentsItems) {
+  var listItems = $.map(commentsItems, function(item){
+  });
+  $('#commentsTable').empty().append(listItems).toggle(listItems.length > 0);
+}, handleError);
+</pre>
 
 	<h2>SKTelecom <a href="http://developer.sktelecom.com">T developers</a> BaaS 예제</h2>
     <ul>
@@ -78,6 +167,15 @@
     <li><a href="sktdevbaas/index2.html" rel="external">조회+더보기</a></li> 
     <li><a href="sktdevbaas/write.html" rel="external">쓰기</a></li> 
     </ul>
+<pre class="prettyprint">
+Baas.initialize("7dab9da0-9541-4c63-9c6a-452c02ba957a");
+var query = new Baas.Query('Comments');
+query.limit(10);
+query.find({
+  success: drawCommentsTable,
+  error: drawCommentsError
+});
+</pre>
 
     <h2>설명</h2>
     <p>우선 SKT의 T developers에서 제공하는 BaaS의 예시로 설명<br />
@@ -114,5 +212,8 @@
     <div id="log"></div>
   </div>
 </div>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+<pre class="prettyprint">
+</pre>
 </body>
 </html>
