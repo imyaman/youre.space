@@ -5,14 +5,33 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-    <link href='http://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <style>
-         body { font-family: 'Noto Sans', sans-serif; }
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+:lang(ko) {
+  font-family: 'Noto Sans KR', sans-serif;
+} 
     </style>
 </head>
-<body>
+<body lang="ko">
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '251282645219736',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 <div data-role="page" id="mainpage">
   <div data-role="header" data-position="fixed" data-theme="a">
     <h1 id="">Javascript를 이용한 BaaS 예제</h1>
@@ -118,6 +137,26 @@ query.find({
 });
 </pre>
 
+	<h2><a href="http://parse.com">Parse Server</a> 예제</h2>
+    <ul>
+    <li><a href="parse-server/index.html" rel="external">댓글보기</a></li>
+    <li><a href="parse-server/write.html" rel="external">댓글쓰기</a></li>
+    </ul>
+<pre class="prettyprint">
+    Parse.initialize('cdzz7YuYMPaopERtDOd15bUvv7oSaFtJYkCNZjIg', 'cPEU1ggQqkfL1Uh2fPekOWsmrCs7xc39H6RKZRpr');
+    Parse.serverURL = 'http://jts.youre.space:1337/parse'
+
+    var query = new Parse.Query('Comments');
+    query.skip(pgCount*currentPage);
+    query.limit(pgCount);
+    query.descending("createdAt");
+    query.find({
+        success: drawCommentsTable,
+        error: drawCommentsError
+    });
+    currentPage++;
+</pre>
+
 	<h2><a href="http://kinvey.com">Kinvey</a> 예제</h2>
     <ul>
     <li><a href="kinvey" rel="external">단순조회</a></li>
@@ -195,6 +234,13 @@ query.find({
         <li><a href="04-README-azure.md" rel=external>04-README-azure.md</a></li>
         <li><a href="05-README-sktdevbaas.md" rel=external>05-README-sktdevbaas.md</a></li>
     </ul>
+
+<div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
 
     <script type="text/javascript" 
         src="http://scr.nsmartad.com/admixer/admixer.js"></script>
