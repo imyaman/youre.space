@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
     <title>Javascript BaaS Example</title>
     <meta charset="utf-8">
@@ -14,7 +14,7 @@
 } 
     </style>
 </head>
-<body lang="ko">
+<body>
 <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -34,12 +34,36 @@
 </script>
 <div data-role="page" id="mainpage">
   <div data-role="header" data-position="fixed" data-theme="a">
-    <h1 id="">Javascript를 이용한 BaaS 예제</h1>
+    <h1 id="">JavaScript를 이용한 BaaS 예제</h1>
   </div>
 
   <div data-role="main" class="ui-content">
 	  <h2>이게 뭔가요?</h2>
-	  <p>BaaS(Backend as a Service)를 잘 쓰자는 취지에서 javascript 예제를 만들어보았습니다. 초보자를 위해 가능한 단순하게 만들었습니다.</p>
+	  <p>BaaS(Backend as a Service)를 잘 쓰자는 취지에서 JavaScript 예제를 만들어보았습니다. 초보자를 위해 가능한 단순하게 만들었습니다.</p>
+
+
+	<h2><a href="http://firebase.google.com">Firebase</a> 예제</h2>
+    <ul>
+    <li><a href="firebase/index.html" rel="external">댓글보기</a></li>
+    <li><a href="firebase/write.html" rel="external">댓글쓰기</a></li>
+    </ul>
+<pre class="prettyprint">
+    var config = {
+      apiKey: "AIzaSyDMRNixCXgWuD3z1P2f_hlM3LqxJry5Rks",
+      authDomain: "blog-c227a.firebaseapp.com",
+      databaseURL: "https://blog-c227a.firebaseio.com",
+      storageBucket: "blog-c227a.appspot.com",
+    };
+    firebase.initializeApp(config);
+
+    firebase.database().ref('/comments/').limitToLast(5).once('value').then(function(snapshot) {
+      console.log(snapshot.val());
+      drawCommentsTable(snapshot.val());
+      // $.each(results, function(index, value){ ...
+      // row.append($("<td>" + value.comment + "</td>"));
+      currentPage++;
+    });
+</pre>
 
 	  <h2><a href="https://api02.youre.space/svr42mp/baas.io/users">youre.space usergrid</a> 예제</h2>
 	  <!--

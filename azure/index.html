@@ -36,7 +36,7 @@ $(function(){
     var commentsItemTable = client.getTable('Comments');
     commentsItemTable.systemProperties = WindowsAzure.MobileServiceTable.SystemProperties.All;
 
-    commentsItemTable.insert({ comment: 'Hey, Storm. ', name: 'Cyclops'}).then(function(result){});
+    //commentsItemTable.insert({ comment: 'Hey, Storm. ', name: 'Cyclops'}).then(function(result){});
 
     var query = commentsItemTable.where({  });
     query.read().then(function(commentsItems) {
