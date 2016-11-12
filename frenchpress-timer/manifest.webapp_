@@ -1,0 +1,24 @@
+{
+  "version": "1.0",
+  "name": "French Press Timer",
+  "description": "3 cups of coffee a day",
+  "launch_path": "index.html",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "developer": {
+    "name": "Sangyong Gwak",
+    "url": "http://youre.space/"
+  },
+  "locales": {
+    "ko": {
+      "description": "프렌치 프레스 커피 만들 때 쓸 타이머 앱입니다.",
+      "developer": {
+        "url": "http://youre.space/"
+      }
+    }
+  },
+  "default_locale": "en"
+}

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- BEGIN TRACKJS -->
+<script type="text/javascript">window._trackJs = { token: '1a1b18828ed64fbb93f2552a8be07d3b' };</script>
+<script type="text/javascript" src="https://cdn.trackjs.com/releases/current/tracker.js"></script>
+<!-- END TRACKJS -->
+<meta charset="utf-8">
+<title>Parse Server 로그인/로그아웃</title>
+<meta name="description" content="Parse Server JavaScript SDK 이용 로그인/로그아웃 예제">
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="https://milligram.github.io/bower_components/milligram/dist/milligram.min.css">
+<style>
+  @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+  :lang(ko) { font-family: 'Noto Sans KR', sans-serif; } 
+</style>
+</head>
+
+<body lang="ko">
+<h1>Parse Server를 이용한 로그인 예제</h1>
+<p>imyaman / hello1 으로 로그인 해보세요.<br />
+F12 키를 눌러 console에 출력되는 것도 보세요.</p>
+<div id="loggedout">
+<form id="formlogin">
+<fieldset>
+  <legend>로그인 정보</legend>
+ID : <input id="myid" type="text" name="username">
+PW : <input id="mypw" type="password" name="psw">
+</fieldset>
+</form>
+<button id="submitit">Login</button>
+<button id="cancelit" form="formlogin" type="reset">Cancel</button>
+<span id="loginerror" style="color: red;"></span>
+</div>
+
+<div id="loggedin">
+<span id="whoami"></span><br />
+<button id="logoutit">Logout</button>
+</div>
+
+<center>
+<div class="main_banner" id="main_banner1">
+  <script type="text/javascript"> var tad_conf = { targetId : 'main_banner1', clientId : 'MX00048A1', slotNo : 2 }; </script>
+  <script type="text/javascript" src="http://adddn.adotsolution.com/contents/sdk/js/tad.min.js"></script>
+</div>
+</center>
+
+</body>
+
+<script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
+<script src="http://www.parsecdn.com/js/parse-latest.min.js"></script>
+<script>
+
+$(document).ready(function() {
+  Parse.initialize('1a9cee34-38cc-4c80-99e8-3ba35a80a36a', '35lHrT6dZGz9S7rhp8L3zX7zYb5ZjuJJ');
+  Parse.serverURL = 'https://parse.buddy.com/parse'
+  checkLogin();
+});
+
+function checkLogin(){
+  var currentUser=Parse.User.current();
+  if(currentUser){
+    $('#loggedout').hide();
+    $('#loggedin').show();
+    $('#whoami').html('' + currentUser.get('username') + '님 반갑습니다.');
+    console.log('You are logged in.');
+  }else{
+    $('#loggedin').hide();
+    $('#loggedout').show();
+    console.log('You are not logged in.');
+  }
+}
+
+$('#submitit').click(function(){
+  var myid = $('#myid').val();
+  var mypw = $('#mypw').val();
+  console.log(myid);
+  console.log(mypw);
+
+  Parse.User.logIn(myid, mypw, {
+    success: function(user) {
+      // Do stuff after successful login.
+      console.log('login success');
+      $('#loginerror').html('');
+      checkLogin();
+    },
+    error: function(user, error) {
+      // The login failed. Check error to see why.
+      console.log('login failure');
+      $('#loginerror').html('아이디/비밀번호가 올바르지 않습니다.');
+    }
+  });
+});
+
+$('#cancelit').click(function(){
+    $('#loginerror').html('');
+});
+
+$('#logoutit').click(function(){
+  Parse.User.logOut().then(() => {
+    var currentUser = Parse.User.current();  // this will now be null
+    if(currentUser){
+      console.log('There was a problem while you were logging out');
+    }else{
+      console.log('You have logged out');
+    }
+  });
+  checkLogin();
+});
+
+</script>
+</html>

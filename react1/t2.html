@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>New Web Lab</title>
+<script src="https://fb.me/react-15.0.0.min.js"></script>
+<script src="https://fb.me/react-dom-15.0.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+<style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+:lang(ko) { font-family: 'Noto Sans KR', sans-serif; } 
+.commentBox { color: red; }
+</style>
+</head>
+<body>
+  <div id="content"></div>
+
+<!-- begin script -->
+<script type="text/babel">
+var CommentBox = React.createClass({
+  render: function() {
+    return (
+      <div className="commentBox">
+        <h1>Comments</h1>
+          <CommentList />
+          <CommentForm />
+      </div>
+    );
+  }
+});
+
+var CommentList = React.createClass({
+  render: function() {
+    return (
+      <div className="commentList">
+        Hi, I am a list.
+      </div>
+    );
+  }
+});
+
+var CommentForm = React.createClass({
+  render: function() {
+    return(
+      <div className="commentForm">
+        Hi, I am a form.
+      </div>
+    );
+  }
+});
+
+ReactDOM.render(
+  <CommentBox />,
+  document.getElementById('content')
+);
+</script>
+</body>
+</html>

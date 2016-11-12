@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<title>우리 여보의 첫번째 앱</title>
+</head>
+<body>
+<div data-role="page" id="mainpage">
+<div data-role="header" data-position="fixed" data-theme="a">
+  <h1 id="">우리 여보의 첫번째 앱</h1>
+</div>
+<div data-role="main" class="ui-content">
+<h2>이게 뭔가요?</h2>
+<p>앞으로 우리 여보가 모바일 앱을 만들겁니다. 이게 그 첫번째가 될거예요.</p>
+<h2>여기에 버튼을 넣을 겁니다.</h2>
+<ul>
+  <li>여기에 목록을 넣을 겁니다.</li>
+  <li>버튼 누르면 내용이 바뀌도록 할 겁니다.</li>
+</ul>
+<div id="yeobongyi">hello</div>
+</div>
+<script>
+/* 우리 여보가 여기에 코드를 만들어 넣을 겁니다. */
+console.log('안녕! 여봉이!');
+$("#yeobongyi").html("<p>안녕</p>");
+</script>
+<script src="//da189i1jfloii.cloudfront.net/js/kinvey-html5-1.6.8.min.js"></script>
+<script>
+(function(){
+    var promise = Kinvey.init({
+        appKey : 'kid_WkVVFh1N5',
+        appSecret : '8ffb767dda014827bd9de4ea01df7a32'
+    });
+    promise.then(function(activeUser) {
+        if(null === activeUser) {
+            return Kinvey.User.create();
+        }
+        console.log(activeUser._id + ' : ' + activeUser.username);
+    
+        
+        var promise1 = Kinvey.ping();
+        promise1.then(function(response) {
+           console.log('Kinvey Ping Success. Kinvey Service is alive, version: ' 
+                       + response.version + ', response: ' + response.kinvey);
+        }, function(error) {
+            console.log('Kinvey Ping Failed. Response: ' + error.description);
+        });
+        
+    }, function(error) {
+        console.log(error.description.toString());
+    });
+	$("#yeobongyi").html("<p>안녕</p>");
+}());
+</script>
+</body>
+</html>

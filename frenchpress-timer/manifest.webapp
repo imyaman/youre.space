@@ -1,0 +1,32 @@
+{
+  "version": "1.0",
+  "name": "5 mins",
+  "description": "3 cups of coffee a day",
+  "launch_path": "/frenchpress-timer/index.html",
+  "icons": {
+    "48": "/frenchpress-timer/icons/mdpi.png",
+    "128": "/frenchpress-timer/icons/128x128_stretch_iTunesArtwork.png",
+    "192": "/frenchpress-timer/icons/xxxhdpi.png",
+    "256": "/frenchpress-timer/icons/256x256_stretch_iTunesArtwork.png",
+    "512": "/frenchpress-timer/icons/GooglePlayStore.png"
+  },
+  "developer": {
+    "name": "Sangyong Gwak",
+    "url": "http://youre.space/"
+  },
+  "locales": {
+    "ko": {
+      "description": "프렌치 프레스 커피 타이머",
+      "developer": {
+        "url": "http://youre.space/"
+      }
+    },
+    "ja": {
+      "description": "La tua nuova fantastica Open Web App",
+      "developer": {
+        "url": "http://youre.space/"
+      }
+    }
+  },
+  "default_locale": "en"
+}

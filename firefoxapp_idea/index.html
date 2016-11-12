@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
+
+    <title>Hello World</title>
+
+    <style>
+      body {
+        border: 1px solid black;
+      }
+    </style>
+
+    <!-- Inline scripts are forbidden in Firefox OS apps (CSP restrictions),
+         so we use a script file. -->
+    <script src="app.js" defer></script>
+
+  </head>
+
+  <body>
+    <!-- This code is in the public domain. Enjoy! -->
+    <h1>Hello World</h1>
+    
+<script src="http://youre.space/kinvey/js/kinvey-html5-1.1.1.min.js"></script>
+<script>
+    var promise = Kinvey.init({
+        appKey : 'kid_WkVVFh1N5',
+        appSecret : '8ffb767dda014827bd9de4ea01df7a32'
+    });
+  
+    promise.then(function(activeUser) {
+        if(null === activeUser) {
+            return Kinvey.User.create();
+        }
+        console.log(activeUser._id + ' : ' + activeUser.username);
+
+        var promise1 = Kinvey.ping();
+        promise1.then(function(response) {
+           console.log('Kinvey Ping Success. Kinvey Service is alive, version: ' 
+                       + response.version + ', response: ' + response.kinvey);
+        }, function(error) {
+            console.log('Kinvey Ping Failed. Response: ' + error.description);
+        });
+      
+    }, function(error) {
+        console.log(error.description.toString());
+    });
+</script>
+    
+    
+  </body>
+
+</html>

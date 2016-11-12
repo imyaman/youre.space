@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>Bootstrap Example</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+:lang(ko) { font-family: 'Noto Sans KR', sans-serif; } 
+</style>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+    
+  .carousel-inner img {
+      width: 100%; /* Set width to 100% */
+      margin: auto;
+      min-height:50px;
+  }
+
+  /* Hide the carousel text when the screen is less than 600 pixels wide */
+  @media (max-width: 600px) {
+    .carousel-caption {
+      display: none; 
+    }
+  }
+  </style>
+</head>
+<body>
+
+<div data-role="page" id="mainpage">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">O</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">YOUR E-SPACE</a></li>
+        <li><a href="http://weblog.youre.space/">WEBLOG</a></li>
+        <li><a href="http://highest.youre.space/">Perl API</a></li>
+        <li><a href="http://lego.youre.space/">Lego</a></li>
+        <li><a href="http://fnb.youre.space/">F & B</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <img src="http://placehold.it/1200x100?text=IMAGE" alt="Image">
+        <div class="carousel-caption">
+          <h3>곽상용의 블로그</h3>
+          <p>IT 서비스에 관심이 많습니다.</p>
+        </div>      
+      </div>
+    </div>
+</div>
+
+<div class="container">    
+  <h3>인문학, 사회과학 등</h3><br>
+  <p>
+
+요즘 인문학에 대한 관심이 예전 어느 때보다 뚜렷해진 느낌이 듭니다. 사람들과 이야기 하다보면 인문학에 대해 다른 생각들이 있는듯합니다. 제가 생각하는 인문학을 이야기 해보겠습니다.<br />
+
+인문학은 자연과학, 사회과학, 공학하고 다른 부분이 뭘까 라는 질문에 자답해보겠습니다. 인문학은 인간의 입장에서 보편적인 가치와 당위성을 연구하고, 사회과학은 사회 '현상'을 연구하고, 자연과학은 자연 '현상'을 연구하고 공학은 삶에 유용한 것을 고안하는 것이라고 생각합니다. 인문학과 사회과학은 비슷한 영역을 연구하지만 다른 접근을 할 수 있습니다. 정의라는 주제에 대해, 인문학은 재난이 발생한 지역에서 음식 값을 올려 이득을 취하는 것이 옳은가를 논한다면, 사회과학은 음식 값을 올리는 행위가 얼마나 발생하는지 현상을 조사하고 결과는 아마 숫자로 이야기할 겁니다. 자연과학이 물체가 자유낙하할 때 가속되는 현상을 연구하고, 공학이 롤러코스터가 잘 움직이도록 고안하는 걸 보면, 인문학과 사회과학은 개인과 사회(사람과 사람들)를, 자연과학과 공학은 물질로 구성된 세상을 주된 대상으로 하고 있다고 생각합니다.<br />
+
+인문학과 사회과학은 서로 별개는 아닐 겁니다. 사회과학의 이론과 조사결과가 있어 인문학의 주장이 힘을 얻기 쉽고, 인문학이 주장하는 가치가 있어 사회과학도 풍부한 시각을 갖게 될 겁니다. 생명 윤리에 대해 이야기 할 때 현상에 대한 정확한 정보를 먼저 이야기 하는 것이나, 심리학의 상담 이론 중에는 인본주의나 현실주의가 있는 것이 생각나네요.<br />
+
+인문학을 문사철이라는 말로 표현하기도 합니다. 문학, 사학, 철학으로요. 문학은 사람들이 가치에 대해 생각하게 합니다. 황폐화된 문명에서 사람들이 힘의 논리로만 살아가는 모습을 보여주는 소설을 본 사람이 환경보호와 질서에 대해 생각하게 되는 것처럼. 사학과 철학도 그러하고요.<br />
+
+대학의 문학 관련 학과의 이름엔 이런 규칙이 보입니다, 약하긴 합니다만. 일반 대학교에 '영어영문학과'가 있습니다. 전문대학교에 '영어과'가 있습니다. '영문학'이라는 부분이 눈에 띕니다. 그 언어를 배우는 것이라기 보단 문학 중에 그 언어로 된 문학을 배우는 것으로 생각합니다.<br />
+
+고고학은 좀 헷갈리는 부분이 있습니다. 인문학처럼 보이지만 실증적인 노력을 하고 있는 점에서요. 심리학도 좀 헷갈리는 부분이 있습니다. 사회과학처럼 보이지만 어느 부분은 자연과학이 아니라고 하기 어려운 점에서요.<br />
+
+주변에 공학 배우신 분들이 인문학 이야기를 꺼냅니다. 특히 서비스 만드는 분들이요. 서비스는 결국 사람을 만족시키는 것이니 사람을 중심으로 생각해야하고, 그런 면에서 인문학이, 그리고 사실은 사회과학도 필요한 것 아닐까 싶네요.
+
+  </p>
+</div>
+
+<nav>
+  <ul class="pager">
+    <span> </span>
+    <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Latest</a></li>
+    <li class=""><a href="#"><span aria-hidden="true">&larr;</span> Older</a></li>
+    <li class=""><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
+    <li class="next"><a href="#">Oldest <span aria-hidden="true">&rarr;</span></a></li>
+    <span> </span>
+  </ul>
+</nav>
+
+<footer class="container-fluid text-center">
+  <p><a href="http://youre.space/">YOU'RE SPACE</a><br />
+  너의 공간
+  </p>
+  
+</footer>
+</div> <!-- data-role="page" id="mainpage" -->
+
+</body>
+</html>

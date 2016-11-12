@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cloud Notepad</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+  </head>
+  <body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://parse.com/downloads/javascript/parse-1.6.12.js"></script>
+<script>
+    Parse.initialize('MFehxsZisLsNZYgZbfRxZhPmfBGfd0ahH7UizC94', 'XUDHzKoaNuNDPisNOx8UxttYcDRsIx8vUsRyraAs');
+</script>
+  
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <h4 class="pull-left">Notes</h4>
+        <div class="btn-group pull-right">
+            <a role="button" class="btn btn-primary" href="index.html">List</a>
+        </div>
+      </div>
+    </div>  
+
+    <form method="post">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="title" class="form-control" id="title" name="title" placeholder="Title" value="">
+      </div>
+      <div class="form-group">
+        <label for="color">Color</label>
+        <input type="color" class="form-control" id="color" name="color" placeholder="Color" value="">
+      </div>
+      <div class="form-group">
+        <label for="body">Content</label>
+        <textarea name="body" id="body" class="form-control" rows="3"></textarea>
+      </div>
+      <div class="form-group">
+        <button type="button" id="submit" class="btn btn-default">Save</button>
+      </div>
+    </form>    
+    
+    <div class="container">
+      <p class="text-center">
+        <a href="http://youre.space/" role="button" class="btn btn-default btn-sm">About</a>
+      </p>
+    </div>  
+
+    <!-- <script src="index.js"></script> -->
+<script>
+function getParameterByName(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+var id;
+$(document).ready(function() {
+    id = getParameterByName('id');
+    if(id){
+      var query = new Parse.Query('notes');
+      query.get(id, {
+          success: drawCommentsTable,
+          error: drawCommentsError
+      });
+    }
+});
+
+function drawCommentsTable(result){
+    console.log(id);
+    if(id != result.id){ alert('invalid id'); return; }
+    var title = result.get('title');
+    var body = result.get('body');
+    var color = result.get('color');
+
+    $("#title").attr('value', title);
+    $("#color").attr('value', color);
+    $("#body").append(body);
+
+}
+
+function drawCommentsError(data){
+    alert('invalid id');
+}
+
+$("#submit").click(function(){
+    var title = $("#title").val();
+    var color = $("#color").val();
+    var body = $("#body").val();
+
+    var Notes = new Parse.Object.extend("notes");
+    var myNote = new Notes();
+    myNote.set("title", title);
+    myNote.set("color", color);
+    myNote.set("body", body);
+    myNote.save(null, {
+        success: alertSuccess,
+        error: alertError
+    });
+});
+function alertSuccess(data){
+  window.location.href='index.html';
+}
+function alertError(data){
+  alert('Not saved');
+}
+
+</script>
+
+<center>
+  <SCRIPT type='text/javascript' 
+    src='http://rsense-ad.realclick.co.kr/rsense/rsense_ad.js?rid=491652379887&stamp=1452697669&v_method=YmFubmVyfDMwMHgyNTA' 
+    charset='utf-8'></SCRIPT>
+</center>
+
+  </body>
+</html>

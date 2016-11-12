@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>오늘의 좋은 말 - 블로그</title>
+<meta name="description" content="오늘의 좋은 말을 이야기 하는 블로그입니다. 댓글을 작성해봅시다.">
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="https://milligram.github.io/css/milligram.min.css">
+<style>
+  @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+  :lang(ko) {
+    font-family: 'Noto Sans KR', sans-serif;
+  } 
+</style>
+</head>
+
+<body>
+<h1>오늘의 좋은 말 - Firebase </h1>
+<h2>able</h2>
+<p>가능하다는 생각만으로도 기분이 좋아집니다. 이 부분은 블로그 본문입니다. 아래 댓글 목록이 표시됩니다. 더 보기, 삭제 없이 단순히 최신 댓글 몇개를 가져옵니다.</p>
+<h3>댓글 목록</h3>
+
+<table id="commentsTable">
+  <thead><tr>  <th>comment</th> <th>name</th> <th>date</th> <th>option</th> </tr></thead>
+  <tbody></tbody>
+</table>
+
+<button id='more'>more</button> <br />
+<button id='write'>write</button>
+</body>
+
+<script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.0.2/firebase.js"></script>
+
+<script>
+var pgCount=5;
+var currentPage=0;
+var myid="";
+
+function getParameterByName(name) {
+  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+      results = regex.exec(location.search);
+  return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+$(document).ready(function() {
+    var config = {
+      apiKey: "AIzaSyDMRNixCXgWuD3z1P2f_hlM3LqxJry5Rks",
+      authDomain: "blog-c227a.firebaseapp.com",
+      databaseURL: "https://blog-c227a.firebaseio.com",
+      storageBucket: "blog-c227a.appspot.com",
+    };
+    firebase.initializeApp(config);
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        console.log(user.uid);
+        myid=user.uid;
+      } else {
+        firebase.auth().signInAnonymously().catch(function(error) {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+  
+          if (errorCode === 'auth/operation-not-allowed') {
+            alert('You must enable Anonymous auth in the Firebase Console.');
+          } else {
+            console.error(error);
+          }
+        });
+      }
+
+// GA
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-78139186-1', 'auto', {userId: myid});
+      ga('send', 'pageview');
+// GA
+
+    }); // end of onAuthStateChanged
+
+    console.log(location.search);
+    console.log(getParameterByName('mode'));
+    console.log(getParameterByName('id'));
+    getCommentsList();
+});
+
+$('#more').click(function(){
+    getCommentsList();
+});
+
+$('#write').click(function(){
+    window.location.href = 'write.html';
+});
+
+function getCommentsList(){
+    firebase.database().ref('/comments/').limitToLast(5).once('value').then(function(snapshot) {
+      console.log(snapshot.val());
+      drawCommentsTable(snapshot.val());
+      currentPage++;
+    });
+}
+
+function drawCommentsTable(results){
+    $.each(results, function(index, value){
+        drawRow(value);
+    });
+}
+
+function drawCommentsTable(results){
+    $.each(results, function(index, value){
+        drawRow(value);
+    });
+}
+function drawRow(rowData) {
+//    var d = new Date(rowData.timeCreated);
+//    var mytime = d.toLocaleString();
+
+    var row = $("<tr />");
+    $("#commentsTable").append(row); 
+    row.append($("<td>" + rowData.comment + "</td>"));
+    row.append($("<td>" + rowData.name + "</td>"));
+    row.append($("<td>-</td>"));
+    row.append($("<td>-</td>"));
+}
+
+function drawCommentsError(data){
+    var row = $("<tr />");
+    $("#commentsTable").append(row); 
+    row.append($("<td>-</td>"));
+    row.append($("<td>-</td>"));
+    row.append($("<td>-</td>"));
+}
+
+function deleteComment(cid){
+    var Comment = Baas.Object.extend('Comments');
+    var row = new Comment;
+    row.set('objectId', cid);
+    row.destroy({
+        success: function(){
+            $('#t'+cid).remove(); 
+        },
+        error: function(){
+        } 
+    });
+}
+
+</script>
+</html>

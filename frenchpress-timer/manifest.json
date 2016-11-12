@@ -1,0 +1,19 @@
+{
+  "name": "5 mins",
+  "description": "French Press Timer",
+  "version": "1.0.0.0",
+  "manifest_version": 2,
+  "icons": {
+    "128": "icons/128x128_stretch_iTunesArtwork.png"
+  },
+  "app": {
+/*
+    "urls": [
+      "http://youre.space/frenchpress-timer"
+    ],
+*/
+    "launch": {
+      "web_url": "http://youre.space/frenchpress-timer"
+    }
+  }
+}

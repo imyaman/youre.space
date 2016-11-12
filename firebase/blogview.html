@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>weblog.youre.space 웹로그</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+:lang(ko) { font-family: 'Noto Sans KR', sans-serif; } 
+</style>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.0.2/firebase.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+    
+  .carousel-inner img {
+      width: 100%; /* Set width to 100% */
+      margin: auto;
+      min-height:50px;
+  }
+
+  /* Hide the carousel text when the screen is less than 600 pixels wide */
+  @media (max-width: 600px) {
+    .carousel-caption {
+      display: none; 
+    }
+  }
+  body { font-size: 16px; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">YOU'RE SPACE</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="http://youre.space/">YOUR E-SPACE</a></li>
+        <li class="active"><a href="http://weblog.youre.space/">WEBLOG</a></li>
+        <li><a href="http://highest.youre.space/">Perl API</a></li>
+        <li><a href="http://lego.youre.space/">Lego</a></li>
+        <li><a href="http://fnb.youre.space/">F & B</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div id="mainpage">
+</div> <!-- end of mainpage -->
+
+<div id="page1">
+</div>
+
+<footer class="container-fluid text-center">
+  <p><a href="http://youre.space/">YOU'RE SPACE</a><br />너의 공간</p>
+</footer>
+
+  <script type="text/javascript" 
+      src="http://scr.nsmartad.com/admixer/admixer.js"></script>
+  <script type="text/javascript">
+      new admixer_ad({
+      admixer_key:"8ch8bwvi",
+      display_id:"admixer_display",
+      adsense_publisher_key:"ca-mb-pub-0000000000000000", //AdSense 사용시에만 필요
+      ad_change:true,  //default : true
+      test : false,    //default : false
+      test_display_id : "log"
+  });
+  </script>
+  <center> <div id="admixer_display"></div> </center>
+
+<script>
+function getParameterByName(name) {
+  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+      results = regex.exec(location.search);
+  return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+/*
+1. initialize
+2. if pid, show the post
+3. if no pid, show recent posts list
+*/
+$(document).ready(function() {
+    var config = {
+    apiKey: "AIzaSyBxsaQ16ZRivKSbgK6fcGIiUyzvcqlAfRM",
+    authDomain: "weblog-683a9.firebaseapp.com",
+    databaseURL: "https://weblog-683a9.firebaseio.com",
+    storageBucket: "weblog-683a9.appspot.com",
+    };
+    firebase.initializeApp(config);
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        console.log(user.uid);
+        myid=user.uid;
+      } else {
+        firebase.auth().signInAnonymously().catch(function(error) {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+  
+          if (errorCode === 'auth/operation-not-allowed') {
+            alert('You must enable Anonymous auth in the Firebase Console.');
+          } else {
+            console.error(error);
+          }
+        });
+      }
+
+// GA
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-78139186-1', 'auto', {userId: myid});
+      ga('send', 'pageview');
+// GA
+
+    }); // end of onAuthStateChanged
+
+    console.log(location.search);
+    console.log(getParameterByName('mode'));
+    var hid = location.hash.substring(1).split("#",1);
+    if(hid){pid = hid; } else { pid = getParameterByName('pid'); }
+    console.log("pid is " + pid);
+    if(pid > 0){
+      // show the post
+      getThePost(pid);
+    } else {
+      // show posts list
+      getEntries5();
+    }
+});
+
+function getEntries5(){
+    firebase.database().ref('/posts1/').limitToLast(30).once('value').then(function(snapshot) {
+      console.log(snapshot.val());
+      $.each(snapshot.val(), function(index, value){
+        drawRow(index, value);
+      });
+    });
+}
+
+function drawRow(index, rowData) {
+    var row = $("<div />");
+    $("#mainpage").append(row); 
+    row.append($("<a href=\"blogview.html#" + index + "\"><h1 id=" + index + ">" + rowData.title + "</h1></a>"));
+    row.append($("<p>" + rowData.date + "<br />" + rowData.author + "</p>"));
+    $("#"+index).click(function(){
+      // action goes here!!
+      getThePost(index);
+    });
+}
+
+function getThePost(postid){
+    firebase.database().ref('/posts1/'+postid).once('value').then(function(snapshot) {
+      showThePost(snapshot.val());
+    });
+}
+
+function showThePost(rowData){
+    $("#page1").html("");
+
+    var row = $("<div />");
+    $("#page1").append(row);
+    row.append($("<h1>" + rowData.title + "</h1>"));
+    row.append($("<p>" + rowData.author + ", " + rowData.date + "</p>"));
+    row.append(rowData.text);
+    row.append($("<a><span id=toList>목록으로</span></a>"));
+    document.title = rowData.title;
+    $("#mainpage").hide();
+    $("#page1").show();
+
+    $("#toList").click(function(){
+      document.title = "weblog.youre.space 웹로그";
+      $("#page1").hide();
+      $("#mainpage").show();
+    });
+}
+</script>
+
+</body>
+</html>

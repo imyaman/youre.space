@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>BaaS JavaScript Example, 아무것도 아닌 댓글 - sashido(parse-server hosting)</title>
+<meta name="description" content="BaaS JavaScript Eample, 백엔드 서비스, baas.io, 곽상용">
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="https://milligram.github.io/css/milligram.min.css">
+<style>
+  @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+  :lang(ko) { font-family: 'Noto Sans KR', sans-serif; } 
+</style>
+</head>
+
+<body>
+<h1>아무것도 아닌 댓글 - sashido(parse-server hosting) </h1>
+<h2>이게 뭔가요?</h2>
+<p>BaaS 중 Parse Server라는 소프트웨어가 있습니다. Parse가 공개하였고, 이를 호스팅하여 제공하는 sashido가 있습니다. sashido가 제공하는 서비스가 얼마나 빠른지 체감해보세요. 아래 댓글 목록은 브라우저가 이 페이지를 방문하였을 때 sashido로부터 받아온 것입니다.</p>
+
+<h3>댓글 작성</h3>
+<form id="postComment">
+  Comment : <input type="text" id="comment"> <br/>
+  Name : <input type="text" id="name"> <br/>
+  PW : <input type="password" id="simplepw"> <br/>
+  <input type="button" id="btnSaveObject" value="save">
+</form>
+
+<button id="list">list</button>
+</body>
+
+<script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
+<script src="//www.parsecdn.com/js/parse-latest.min.js"></script>
+<script>
+
+$(document).ready(function() {
+    Parse.initialize("pf1uoi39etnu2sv6f4l7771k42090bwr2pyxt7bw", "f8vp0c3bg3sa0mjmvqzi3x2xykybw54tcrp9t70c");
+    Parse.serverURL = 'https://pg-app-n3o5ldhr7fqbkx2q2qbjr0y4w7pf9t.scalabl.cloud/1/';
+});
+
+$("#btnSaveObject").click(function() {
+        var comment = $('#comment').val();
+        var name = $('#name').val();
+        var pw = $('#simplepw').val();
+
+        var Comment = new Parse.Object.extend("Comments");
+        var myComment = new Comment();
+        myComment.set("comment", comment);
+        myComment.set("name", name);
+        myComment.set("simplepw", pw);
+        myComment.save(null, {
+            success: alertSuccess,
+            error: alertError
+        });
+
+});
+
+function alertSuccess(data){
+  alert('Saved');
+}
+
+function alertError(data){
+  alert('Not saved');
+}
+
+$('#list').click(function(){
+    window.location.href='index.html';
+});
+         
+</script>
+</html>

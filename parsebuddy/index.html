@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- BEGIN TRACKJS -->
+<script type="text/javascript">window._trackJs = { token: '1a1b18828ed64fbb93f2552a8be07d3b' };</script>
+<script type="text/javascript" src="https://cdn.trackjs.com/releases/current/tracker.js"></script>
+<!-- END TRACKJS -->
+<meta charset="utf-8">
+<title>Parse Server 데이터 조회</title>
+<meta name="description" content="Parse Server JavaScript SDK 이용 데이터 조회 예제">
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="https://milligram.github.io/bower_components/milligram/dist/milligram.min.css">
+<style>
+  @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+  :lang(ko) { font-family: 'Noto Sans KR', sans-serif; } 
+</style>
+</head>
+
+<body lang="ko">
+<h1>Parse Server from Buddy</h1>
+<h2>I like Parse Server, especially from Buddy.</h2>
+<p>Buddy.com이 제공하는 Parse Server를 이용하여 댓글을 보고 쓰는 기능을 만들어보았습니다.</p>
+<h3>댓글 목록</h3>
+
+<table id="commentsTable">
+  <thead><tr>  <th>comment</th> <th>name</th> <th>date</th> <th>option</th> </tr></thead>
+  <tbody></tbody>
+</table>
+
+<button id='more'>more</button> <br />
+<button id='write'>write</button>
+
+<center>
+<div class="main_banner" id="main_banner1">
+  <script type="text/javascript"> var tad_conf = { targetId : 'main_banner1', clientId : 'MX00048A1', slotNo : 2 }; </script>
+  <script type="text/javascript" src="http://adddn.adotsolution.com/contents/sdk/js/tad.min.js"></script>
+</div>
+</center>
+
+</body>
+
+<script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
+<script src="//www.parsecdn.com/js/parse-latest.min.js"></script>
+<script>
+var pgCount=5;
+var currentPage=0;
+
+$(document).ready(function() {
+    Parse.initialize('1a9cee34-38cc-4c80-99e8-3ba35a80a36a', '35lHrT6dZGz9S7rhp8L3zX7zYb5ZjuJJ');
+    Parse.serverURL = 'https://parse.buddy.com/parse'
+    getCommentsList();
+});
+
+$('#more').click(function(){
+    getCommentsList();
+});
+
+$('#write').click(function(){
+    window.location.href = 'write.html';
+});
+
+function getCommentsList(){
+    var query = new Parse.Query('Comments');
+    query.skip(pgCount*currentPage);
+    query.limit(pgCount);
+    query.descending("createdAt");
+    query.find({
+        success: drawCommentsTable,
+        error: drawCommentsError
+    });
+    currentPage++;
+}
+
+function drawCommentsTable(results){
+    $.each(results, function(index, value){
+        drawRow(value);
+    });
+}
+
+function drawCommentsTable(results){
+    $.each(results, function(index, value){
+        drawRow(value);
+    });
+}
+function drawRow(rowData) {
+    var d = new Date(rowData.createdAt);
+    var mytime = d.toLocaleString();
+
+    var row = $("<tr />");
+    $("#commentsTable").append(row); 
+    row.append($("<td>" + rowData.get('comment') + "</td>"));
+    row.append($("<td>" + rowData.get('name') + "</td>"));
+    row.append($("<td>" + mytime + "</td>"));
+}
+
+function drawCommentsError(data){
+    var row = $("<tr />");
+    $("#commentsTable").append(row); 
+    row.append($("<td>-</td>"));
+    row.append($("<td>-</td>"));
+    row.append($("<td>-</td>"));
+}
+
+function deleteComment(cid){
+    var Comment = Baas.Object.extend('Comments');
+    var row = new Comment;
+    row.set('objectId', cid);
+    row.destroy({
+        success: function(){
+            $('#t'+cid).remove(); 
+        },
+        error: function(){
+        } 
+    });
+}
+
+</script>
+</html>

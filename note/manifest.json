@@ -1,0 +1,18 @@
+{
+  "name" : "Cloud Notepad using Parse Server",
+  "short_name" : "Cloud Notepad",
+  "start_url" : "index.html",
+  "version": "1.0.0.0",
+  "manifest_version": 2,
+  "icons" : [{
+        "src": "apple-touch-icon-72x72-precomposed.png",
+        "sizes": "72x72",
+      }, {
+        "src": "appicon144.png",
+        "sizes": "144x144"
+      }, {
+        "src": "appicon.png",
+        "sizes": "128x128",
+      }]
+
+}

@@ -1,0 +1,62 @@
+<!doctype html>
+<head lang="en">
+<meta charset="utf-8">
+<title>Azure App Services JavaScript Example</title>
+<meta name="description" content="Azure는 App Services라는 이름으로 BaaS를 제공하고 있습니다. 이 서비스를 이용하는 예제를 자바스크립트로 만들어보았습니다.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://milligram.github.io/css/milligram.min.css">
+<style>
+  @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+  :lang(ko) { font-family: 'Noto Sans KR', sans-serif; } 
+</style>
+</head>
+
+<body lang="ko">
+<script type="text/javascript" src="http://go.onclasrv.com/apu.php?zoneid=744119"></script>
+<h1>Azure App Services</h1>
+<h2>JavaScipt 예제</h2>
+<p>Azure는 App Services라는 이름으로 BaaS를 제공하고 있습니다. 이 서비스를 이용하는 예제를 자바스크립트로 만들어보았습니다.<br>
+이 예제는 댓글 보기와 쓰기를 보여줍니다.</p>
+<h3>댓글 목록</h3>
+
+<table id="commentsTable">
+  <thead><tr>  <td>comment</td> <td>name</td> <td>date</td>  </tr></thead>
+  <tbody></tbody>
+</table>
+
+<a class="button button-clear" style="width: 100%;" href="http://go.ad2up.com/afu.php?id=464574">DOWNLOAD SOURCE CODE</a>
+
+<script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.1.min.js'></script>
+<script src="http://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.2.7.min.js"></script>
+<script>
+$(function(){
+    var client = new WindowsAzure.MobileServiceClient('http://svr42mp-free.azurewebsites.net/');
+    var commentsItemTable = client.getTable('Comments');
+    commentsItemTable.systemProperties = WindowsAzure.MobileServiceTable.SystemProperties.All;
+
+    commentsItemTable.insert({ comment: 'Hey, Storm. ', name: 'Cyclops'}).then(function(result){});
+
+    var query = commentsItemTable.where({  });
+    query.read().then(function(commentsItems) {
+        var listItems = $.map(commentsItems, function(item){
+            var d = new Date(item.createdAt);
+            var mytime = d.toLocaleString();
+            console.log(item.comment);
+            return $('<tr>').append($('<td>' + item.comment + '</td>'))
+                .append($('<td>' + item.name + '</td>'))
+                .append($('<td>' + mytime + '</td>'));
+        });
+        console.log(listItems.toString());
+        $('#commentsTable').empty().append(listItems).toggle(listItems.length > 0);
+
+    }, handleError);
+});
+
+function handleError(error) {
+    var text = error + (error.request ? ' - ' + error.request.status : '');
+    $('#errorlog').append($('<li>').text(text));
+}
+</script>
+
+</body>
+</html>

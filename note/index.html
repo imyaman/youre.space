@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cloud Notepad</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="appicon.png">
+    <!-- for apple -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Cloud Notepad">
+
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114x114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72x72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+<link rel="apple-touch-startup-image" href="Default-Landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+<link rel="apple-touch-startup-image" href="Default-Portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+<link rel="apple-touch-startup-image" href="Default.png" media="screen and (max-device-width: 320px)">
+    <!-- for chrome -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Cloud Notepad">
+
+    <meta name="msapplication-TileImage" content="appicon144.png">
+  </head>
+  <body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://parse.com/downloads/javascript/parse-1.6.12.js"></script>
+<script>
+    Parse.initialize('MFehxsZisLsNZYgZbfRxZhPmfBGfd0ahH7UizC94', 'XUDHzKoaNuNDPisNOx8UxttYcDRsIx8vUsRyraAs');
+</script>
+  
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <h4 class="pull-left">Notes</h4>
+        <div class="btn-group pull-right">
+          <a role="button" class="btn btn-primary" href="edit.html">Add</a>
+        </div>
+      </div>
+    </div>  
+
+    <div class="panel panel-default">
+      <form method="get" action="/index">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search for...">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-default">Go!</button>
+          </span>
+        </div>  
+      </form>
+    </div>  
+    
+    <ul class="list-group">
+      
+      <!-- 여기를 반복
+      <li class="list-group-item">
+        노트 제목
+        <span class="label label-primary pull-right" style="background: #FF0000;">&nbsp;</span><br/> 
+        <small>Last edited: 2016-01-03 17:00</small><br/>
+        <a role="button" class="btn btn-primary" href="">View</a>
+        <a role="button" class="btn btn-primary pull-right" href="">Delete</a>      
+      </li>
+      -->
+      
+    </ul>
+    
+    <div class="container">
+      <p class="text-center">
+        <a href="http://youre.space/" role="button" class="btn btn-default btn-sm">About</a>
+      </p>
+    </div> 
+    
+    <!-- <script src="index.js"></script> -->
+<script>
+$(document).ready(function() {
+
+    var query = new Parse.Query('notes');
+    query.limit(10);
+    query.descending("createdAt");
+    query.find({
+        success: drawCommentsTable,
+        error: drawCommentsError
+    });
+});
+
+function drawCommentsTable(results){
+    $.each(results, function(index, value){
+        drawRow(value);
+    });
+}
+
+function drawRow(rowData) {
+    var d = new Date(rowData.createdAt);
+    var mytime = d.toLocaleString();
+    var objectId = rowData.id;
+    console.log(rowData.get('title'));
+
+    var row =$("<li />"); 
+    row.attr("class", "list-group-item");
+    $(".list-group").append(row); 
+    row.append(rowData.get('title'));
+    row.append('<span class="label label-primary pull-right" style="background: ' + rowData.get('color') + ';">&nbsp;</span><br/>');
+    row.append('    <small>Last edited: ' + mytime + '</small><br/>');
+    row.append('    <a role="button" class="btn btn-primary" href="view.html?id=' + objectId + '">View</a>');
+    row.append('    <a role="button" class="btn btn-primary pull-right" href="view.html?id=' +objectId + '">Delete</a>');
+}
+
+function drawCommentsError(data){
+    var row =$("<li />"); 
+    row.attr("class", "list-group-item");
+    $(".list-group").append(row); 
+    row.append('no item');
+}
+
+</script>
+
+<center>
+  <SCRIPT type='text/javascript' 
+    src='http://rsense-ad.realclick.co.kr/rsense/rsense_ad.js?rid=491652379887&stamp=1452697669&v_method=YmFubmVyfDMwMHgyNTA' 
+    charset='utf-8'></SCRIPT>
+</center>
+
+  </body>
+</html>

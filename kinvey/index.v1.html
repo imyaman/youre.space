@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>오늘의 좋은 말 - 블로그</title>
+<meta name="description" content="오늘의 좋은 말을 이야기 하는 블로그입니다. 댓글을 작성해봅시다.">
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="https://milligram.github.io/css/milligram.min.css">
+<style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+:lang(ko) {
+	font-family: 'Noto Sans KR', sans-serif;
+} 
+</style>
+</head>
+
+<body>
+<h1>오늘의 좋은 말 - kinvey</h1>
+<h2>able</h2>
+<p>가능하다는 생각만으로도 기분이 좋아집니다. 이 부분은 블로그 본문입니다. 아래 댓글 목록이 표시됩니다. 더 보기, 삭제 없이 단순히 최신 댓글 몇개를 가져옵니다.</p>
+<h3>댓글 목록</h3>
+
+<table id="commentsTable">
+<thead><tr>  <td>comment</td> <td>name</td> <td>date</td>  </tr></thead>
+<tbody>
+</tbody>
+</table>
+
+
+<script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
+<!-- script src="//da189i1jfloii.cloudfront.net/js/kinvey-html5-1.6.9.min.js"></script -->
+<script src="//da189i1jfloii.cloudfront.net/js/kinvey-html5-sdk-3.0.3.min.js"></script>
+<script>
+(function(){
+
+    var promise = Kinvey.init({
+        appKey : 'kid_WkVVFh1N5',
+        appSecret : '8ffb767dda014827bd9de4ea01df7a32'
+    });
+    promise.then(function(activeUser) {
+        if(null === activeUser) {
+            return Kinvey.User.create();
+        }
+        console.log(activeUser._id + ' : ' + activeUser.username);
+        getComments();
+    
+        /*
+        var promise1 = Kinvey.ping();
+        promise1.then(function(response) {
+           console.log('Kinvey Ping Success. Kinvey Service is alive, version: ' 
+                       + response.version + ', response: ' + response.kinvey);
+        }, function(error) {
+            console.log('Kinvey Ping Failed. Response: ' + error.description);
+        });
+        */
+    }, function(error) {
+        console.log(error.description.toString());
+    });
+}());
+
+function getComments(){
+    var promise = Kinvey.DataStore.find('Comments', null, {
+        success: drawCommentsTable,
+        error : drawCommentsError
+    });
+}
+
+function drawCommentsTable(results){
+    $.each(results, function(index, value){
+        drawRow(value);
+    });
+}
+
+function drawRow(rowData) {
+    var row; 
+    var d = new Date(rowData._kmd.ect);
+    var mytime = d.toLocaleString();
+
+    row = $('<tr id='+ 't' + rowData.id +'>');
+    row.append($("<td>" + rowData.comment + "</td>"));
+    row.append($("<td>" + rowData.name + "</td>"));
+    row.append($("<td>" + mytime + "</td>"));
+    $("#commentsTable").append(row); 
+}
+
+function drawCommentsError(data){
+    var row = $("<tr />");
+    row.append($("<td>-</td>"));
+    row.append($("<td>-</td>"));
+    row.append($("<td>-</td>"));
+    row.append($("<td>-</td>"));
+    $("#commentsTable").append(row); 
+}
+
+</script>
+
+</body>
+</html>

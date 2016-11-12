@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>Javascript BaaS Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+:lang(ko) {
+  font-family: 'Noto Sans KR', sans-serif;
+} 
+    </style>
+</head>
+<body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '251282645219736',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+<div data-role="page" id="mainpage">
+  <div data-role="header" data-position="fixed" data-theme="a">
+    <h1 id="">JavaScript를 이용한 BaaS 예제</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+	  <h2>이게 뭔가요?</h2>
+	  <p>BaaS(Backend as a Service)를 잘 쓰자는 취지에서 JavaScript 예제를 만들어보았습니다. 초보자를 위해 가능한 단순하게 만들었습니다.</p>
+
+
+	<h2><a href="http://firebase.google.com">Firebase</a> 예제</h2>
+    <ul>
+    <li><a href="firebase/index.html" rel="external">댓글보기</a></li>
+    <li><a href="firebase/write.html" rel="external">댓글쓰기</a></li>
+    </ul>
+<pre class="prettyprint">
+    var config = {
+      apiKey: "AIzaSyDMRNixCXgWuD3z1P2f_hlM3LqxJry5Rks",
+      authDomain: "blog-c227a.firebaseapp.com",
+      databaseURL: "https://blog-c227a.firebaseio.com",
+      storageBucket: "blog-c227a.appspot.com",
+    };
+    firebase.initializeApp(config);
+
+    firebase.database().ref('/comments/').limitToLast(5).once('value').then(function(snapshot) {
+      console.log(snapshot.val());
+      drawCommentsTable(snapshot.val());
+      // $.each(results, function(index, value){ ...
+      // row.append($("<td>" + value.comment + "</td>"));
+      currentPage++;
+    });
+</pre>
+
+	  <h2><a href="https://api02.youre.space/svr42mp/baas.io/users">youre.space usergrid</a> 예제</h2>
+	  <!--
+	  <div class="main_banner" id="main_banner2">
+		  <script type="text/javascript">
+			  var tad_conf = {
+				  targetId : 'main_banner2',
+				  clientId : 'MX0005733',
+				  slotNo : 2,
+				  adType : 'inline',
+				  test : false,
+				  newWindow : false
+			  };
+		  </script>
+		  <script type="text/javascript" src="http://adddn.adotsolution.com/contents/sdk/js/tad.min.js"></script>
+	  </div>
+	  -->
+    <ul>
+    <li><a href="usergrid" rel="external">단순조회</a>
+    <li><a href="usergrid/index2.html" rel="external">조회+더보기</a></li>
+    <li><a href="usergrid/write.html" rel="external">쓰기</a></li>
+    </ul>
+데이터를 조회하는 부분. usergrid와 baas.io는 서로 비슷합니다.
+    <pre class="prettyprint">
+&lt;script src="js/usergrid.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+$(document).ready(function() {
+    var client = new Usergrid.Client({
+        'URI':'https://api02.youre.space',
+        'orgName':'svr42mp', 
+        'appName':'baas.io',
+        //'token':baas_token
+    });
+
+    var options = {
+        'client':client,
+        'endpoint':'comments',
+        'qs':{
+            'ql':'order by created DESC'
+        }
+    }
+
+    client.request(options, function (err, data) {
+      if(!err){
+          drawCommentsTable(data.entities);
+      }else{
+          console.log(err.toString());
+      }
+    });
+}
+    </pre>
+
+	<h2>kt <a href="http://baas.io">baas.io</a> 예제</h2>
+    <ul>
+    <li><a href="baas.io" rel="external">단순조회</a>
+    <li><a href="baas.io/index2.html" rel="external">조회+더보기</a></li>
+    <li><a href="baas.io/write.html" rel="external">쓰기</a></li>
+    </ul>
+데이터를 조회하는 부분
+    <pre class="prettyprint">
+var io = new Baas.IO({
+  'URI':'https://api.baas.io',
+  'orgName':'imyaman',
+  'appName':'b-log',
+});
+
+var options = {
+  'client':io,
+  'endpoint':'comments',
+  'qs':{
+    'ql':'order by created DESC'
+  }
+}
+
+io.request(options, function (err, data) {
+ if(!err){
+ }else{
+ }
+});
+    </pre>
+
+	<h2><a href="http://parse.com">Parse</a> 예제</h2>
+    <ul>
+    <li><a href="parse" rel="external">단순조회</a></li>
+    <li><a href="parse/index2.html" rel="external"></a></li>
+    <li><a href="parse/write.html" rel="external"></a></li>
+    </ul>
+<pre class="prettyprint">
+Parse.initialize('cdzz7YuYMPaopERtDOd15bUvv7oSaFtJYkCNZjIg', 'cPEU1ggQqkfL1Uh2fPekOWsmrCs7xc39H6RKZRpr');
+var query = new Parse.Query('Comments');
+query.limit(10);
+query.find({
+  success: drawCommentsTable,
+  error: drawCommentsError
+});
+</pre>
+
+	<h2><a href="http://parse.com">Parse Server</a> 예제</h2>
+    <ul>
+    <li><a href="parse-server/index.html" rel="external">댓글보기</a></li>
+    <li><a href="parse-server/write.html" rel="external">댓글쓰기</a></li>
+    </ul>
+<pre class="prettyprint">
+    Parse.initialize('cdzz7YuYMPaopERtDOd15bUvv7oSaFtJYkCNZjIg', 'cPEU1ggQqkfL1Uh2fPekOWsmrCs7xc39H6RKZRpr');
+    Parse.serverURL = 'http://jts.youre.space:1337/parse'
+
+    var query = new Parse.Query('Comments');
+    query.skip(pgCount*currentPage);
+    query.limit(pgCount);
+    query.descending("createdAt");
+    query.find({
+        success: drawCommentsTable,
+        error: drawCommentsError
+    });
+    currentPage++;
+</pre>
+
+	<h2><a href="http://kinvey.com">Kinvey</a> 예제</h2>
+    <ul>
+    <li><a href="kinvey" rel="external">단순조회</a></li>
+    <li><a href="kinvey/index2.html" rel="external"></a></li>
+    <li><a href="kinvey/write.html" rel="external"></a></li> 
+    </ul>
+<pre class="prettyprint">
+var promise = Kinvey.init({
+  appKey : 'kid_WkVVFh1N5',
+  appSecret : '8ffb767dda014827bd9de4ea01df7a32'
+});
+promise.then(function(activeUser) {
+  if(null === activeUser) {
+    return Kinvey.User.create();
+  }
+}, function(error) {
+});
+
+var promise = Kinvey.DataStore.find('Comments', null, {
+  success : drawCommentsTable,
+  error : drawCommentsError
+});
+</pre>
+
+	<h2>Microsoft <a href="http://azure.com">Azure Mobile Services</a> 예제</h2>
+    <ul>
+    <li><a href="azure" rel="external">단순조회</a></li>
+    <li><a href="azure/index2.html" rel="external"></a></li> 
+    <li><a href="azure/write.html" rel="external"></a></li> 
+    </ul>
+<pre class="prettyprint">
+var client = new WindowsAzure.MobileServiceClient('https://nextlayer.azure-mobile.net/', 'tIBCRAuvMqKAojuCYMmbqUdLzKSrNw70');
+var commentsItemTable = client.getTable('Comments');
+commentsItemTable.systemProperties = WindowsAzure.MobileServiceTable.SystemProperties.All;
+
+var query = commentsItemTable.where({ });
+query.read().then(function(commentsItems) {
+  var listItems = $.map(commentsItems, function(item){
+  });
+  $('#commentsTable').empty().append(listItems).toggle(listItems.length > 0);
+}, handleError);
+</pre>
+
+	<h2>SKTelecom <a href="http://developer.sktelecom.com">T developers</a> BaaS 예제</h2>
+    <ul>
+    <li><a href="sktdevbaas" rel="external">단순조회</a></li>
+    <li><a href="sktdevbaas/index2.html" rel="external">조회+더보기</a></li> 
+    <li><a href="sktdevbaas/write.html" rel="external">쓰기</a></li> 
+    </ul>
+<pre class="prettyprint">
+Baas.initialize("7dab9da0-9541-4c63-9c6a-452c02ba957a");
+var query = new Baas.Query('Comments');
+query.limit(10);
+query.find({
+  success: drawCommentsTable,
+  error: drawCommentsError
+});
+</pre>
+
+    <h2>설명</h2>
+    <p>우선 SKT의 T developers에서 제공하는 BaaS의 예시로 설명<br />
+    <a href="http://1drv.ms/1JOFZAu" rel="external">여기</a></p>
+    <p>소스코드를 보라</p>
+    <p>속도는 baas.io, sktdevbaas, parse, kinvey 순</p>
+    <p>편리함은 baas.io, parse, sktdevbaas, kinvey 순</p>
+    <p>Microsoft의 Azure Mobile Services는 신세계. 대단함.</p>
+
+    <ul>
+        <li><a href="http://github.com/imyaman/MBaaS-SimpleExample" rel=external>README.md on github</a></li>
+        <li><a href="README.md" rel=external>README.md</a></li>
+        <li><a href="00-README-introduce.md" rel=external>00-README-introduce.md</a></li>
+        <li><a href="01-README-baas.io.md" rel=external>01-README-baas.io.md</a></li>
+        <li><a href="02-README-parse.md" rel=external>02-README-parse.md</a></li>
+        <li><a href="03-README-kinvey.md" rel=external>03-README-kinvey.md</a></li>
+        <li><a href="04-README-azure.md" rel=external>04-README-azure.md</a></li>
+        <li><a href="05-README-sktdevbaas.md" rel=external>05-README-sktdevbaas.md</a></li>
+    </ul>
+
+<div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
+
+    <script type="text/javascript" 
+        src="http://scr.nsmartad.com/admixer/admixer.js"></script>
+    <script type="text/javascript">
+        new admixer_ad({
+        admixer_key:"8ch8bwvi",
+        display_id:"admixer_display",
+        adsense_publisher_key:"ca-mb-pub-0000000000000000", //AdSense 사용시에만 필요
+        ad_change:true,  //default : true
+        test : false,    //default : false
+        test_display_id : "log"
+    });
+    </script>
+    <center>
+    <div id="admixer_display"></div>
+    </center>
+    <div id="log"></div>
+  </div>
+</div>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+<pre class="prettyprint">
+</pre>
+</body>
+</html>
