@@ -1,52 +1,87 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
-    <title>Javascript BaaS Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-    <script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <style>
-@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
-:lang(ko) {
-  font-family: 'Noto Sans KR', sans-serif;
-} 
-    </style>
+<!-- BEGIN TRACKJS -->
+<script type="text/javascript">window._trackJs = { token: '1a1b18828ed64fbb93f2552a8be07d3b' };</script>
+<script type="text/javascript" src="https://cdn.trackjs.com/releases/current/tracker.js"></script>
+<!-- END TRACKJS -->
+<title>JavaScript BaaS Example</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+  :lang(ko) { font-family: 'Noto Sans KR', sans-serif; } 
+</style>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+    
+  .carousel-inner img {
+      width: 100%; /* Set width to 100% */
+      margin: auto;
+      min-height:50px;
+  }
+
+  /* Hide the carousel text when the screen is less than 600 pixels wide */
+  @media (max-width: 600px) {
+    .carousel-caption {
+      display: none; 
+    }
+  }
+  body {
+    font-size: 16px;
+  }
+  </style>
 </head>
-<body>
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '251282645219736',
-      xfbml      : true,
-      version    : 'v2.6'
-    });
-  };
+<body lang="ko">
 
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-<div data-role="page" id="mainpage">
-  <div data-role="header" data-position="fixed" data-theme="a">
-    <h1 id="">JavaScript를 이용한 BaaS 예제</h1>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">YOU'RE SPACE</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">YOUR E-SPACE</a></li>
+        <li><a href="http://weblog.youre.space/">WEBLOG</a></li>
+        <li><a href="http://highest.youre.space/">Perl API</a></li>
+        <li><a href="http://lego.youre.space/">Lego</a></li>
+        <li><a href="http://fnb.youre.space/">F & B</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
   </div>
+</nav>
 
-  <div data-role="main" class="ui-content">
-	  <h2>이게 뭔가요?</h2>
-	  <p>BaaS(Backend as a Service)를 잘 쓰자는 취지에서 JavaScript 예제를 만들어보았습니다. 초보자를 위해 가능한 단순하게 만들었습니다.</p>
+<div id="mainpage">
+<h1>JavaScript를 이용한 BaaS 예제</h1>
+<h2>이게 뭔가요?</h2>
+<p>BaaS(Backend as a Service)를 잘 쓰자는 취지에서 JavaScript 예제를 만들어보았습니다. 초보자를 위해 가능한 단순하게 만들었습니다.</p>
 
-
-	<h2><a href="http://firebase.google.com">Firebase</a> 예제</h2>
-    <ul>
-    <li><a href="firebase/index.html" rel="external">댓글보기</a></li>
-    <li><a href="firebase/write.html" rel="external">댓글쓰기</a></li>
-    </ul>
+<h2><a href="http://firebase.google.com">Firebase</a> 예제</h2>
+<ul>
+<li><a href="firebase/index.html" rel="external">댓글보기</a></li>
+<li><a href="firebase/write.html" rel="external">댓글쓰기</a></li>
+</ul>
 <pre class="prettyprint">
     var config = {
       apiKey: "AIzaSyDMRNixCXgWuD3z1P2f_hlM3LqxJry5Rks",
@@ -65,27 +100,27 @@
     });
 </pre>
 
-	  <h2><a href="https://api02.youre.space/svr42mp/baas.io/users">youre.space usergrid</a> 예제</h2>
-	  <!--
-	  <div class="main_banner" id="main_banner2">
-		  <script type="text/javascript">
-			  var tad_conf = {
-				  targetId : 'main_banner2',
-				  clientId : 'MX0005733',
-				  slotNo : 2,
-				  adType : 'inline',
-				  test : false,
-				  newWindow : false
-			  };
-		  </script>
-		  <script type="text/javascript" src="http://adddn.adotsolution.com/contents/sdk/js/tad.min.js"></script>
-	  </div>
-	  -->
-    <ul>
-    <li><a href="usergrid" rel="external">단순조회</a>
-    <li><a href="usergrid/index2.html" rel="external">조회+더보기</a></li>
-    <li><a href="usergrid/write.html" rel="external">쓰기</a></li>
-    </ul>
+<h2><a href="https://api02.youre.space/svr42mp/baas.io/users">youre.space usergrid</a> 예제</h2>
+<!--
+<div class="main_banner" id="main_banner2">
+  <script type="text/javascript">
+	  var tad_conf = {
+		  targetId : 'main_banner2',
+		  clientId : 'MX0005733',
+		  slotNo : 2,
+		  adType : 'inline',
+		  test : false,
+		  newWindow : false
+	  };
+  </script>
+  <script type="text/javascript" src="http://adddn.adotsolution.com/contents/sdk/js/tad.min.js"></script>
+</div>
+-->
+<ul>
+<li><a href="usergrid" rel="external">단순조회</a>
+<li><a href="usergrid/index2.html" rel="external">조회+더보기</a></li>
+<li><a href="usergrid/write.html" rel="external">쓰기</a></li>
+</ul>
 데이터를 조회하는 부분. usergrid와 baas.io는 서로 비슷합니다.
     <pre class="prettyprint">
 &lt;script src="js/usergrid.js"&gt;&lt;/script&gt;
@@ -116,12 +151,12 @@ $(document).ready(function() {
 }
     </pre>
 
-	<h2>kt <a href="http://baas.io">baas.io</a> 예제</h2>
-    <ul>
-    <li><a href="baas.io" rel="external">단순조회</a>
-    <li><a href="baas.io/index2.html" rel="external">조회+더보기</a></li>
-    <li><a href="baas.io/write.html" rel="external">쓰기</a></li>
-    </ul>
+<h2>kt <a href="http://baas.io">baas.io</a> 예제</h2>
+<ul>
+<li><a href="baas.io" rel="external">단순조회</a>
+<li><a href="baas.io/index2.html" rel="external">조회+더보기</a></li>
+<li><a href="baas.io/write.html" rel="external">쓰기</a></li>
+</ul>
 데이터를 조회하는 부분
     <pre class="prettyprint">
 var io = new Baas.IO({
@@ -145,12 +180,12 @@ io.request(options, function (err, data) {
 });
     </pre>
 
-	<h2><a href="http://parse.com">Parse</a> 예제</h2>
-    <ul>
-    <li><a href="parse" rel="external">단순조회</a></li>
-    <li><a href="parse/index2.html" rel="external"></a></li>
-    <li><a href="parse/write.html" rel="external"></a></li>
-    </ul>
+<h2><a href="http://parse.com">Parse</a> 예제</h2>
+<ul>
+<li><a href="parse" rel="external">단순조회</a></li>
+<li><a href="parse/index2.html" rel="external"></a></li>
+<li><a href="parse/write.html" rel="external"></a></li>
+</ul>
 <pre class="prettyprint">
 Parse.initialize('cdzz7YuYMPaopERtDOd15bUvv7oSaFtJYkCNZjIg', 'cPEU1ggQqkfL1Uh2fPekOWsmrCs7xc39H6RKZRpr');
 var query = new Parse.Query('Comments');
@@ -161,11 +196,11 @@ query.find({
 });
 </pre>
 
-	<h2><a href="http://parse.com">Parse Server</a> 예제</h2>
-    <ul>
-    <li><a href="parse-server/index.html" rel="external">댓글보기</a></li>
-    <li><a href="parse-server/write.html" rel="external">댓글쓰기</a></li>
-    </ul>
+<h2><a href="http://parse.com">Parse Server</a> 예제</h2>
+<ul>
+<li><a href="parse-server/index.html" rel="external">댓글보기</a></li>
+<li><a href="parse-server/write.html" rel="external">댓글쓰기</a></li>
+</ul>
 <pre class="prettyprint">
     Parse.initialize('cdzz7YuYMPaopERtDOd15bUvv7oSaFtJYkCNZjIg', 'cPEU1ggQqkfL1Uh2fPekOWsmrCs7xc39H6RKZRpr');
     Parse.serverURL = 'http://jts.youre.space:1337/parse'
@@ -181,12 +216,32 @@ query.find({
     currentPage++;
 </pre>
 
-	<h2><a href="http://kinvey.com">Kinvey</a> 예제</h2>
-    <ul>
-    <li><a href="kinvey" rel="external">단순조회</a></li>
-    <li><a href="kinvey/index2.html" rel="external"></a></li>
-    <li><a href="kinvey/write.html" rel="external"></a></li> 
-    </ul>
+<h2><a href="http://parse.buddy.com">Buddy - Parse Server</a> 예제</h2>
+<ul>
+<li><a href="parsebuddy/index.html" rel="external">댓글보기</a></li>
+<li><a href="parsebuddy/write.html" rel="external">댓글쓰기</a></li>
+</ul>
+<pre class="prettyprint">
+    Parse.initialize('***********', '**********');
+    Parse.serverURL = 'http://parse.buddy.com/parse'
+
+    var query = new Parse.Query('Comments');
+    query.skip(pgCount*currentPage);
+    query.limit(pgCount);
+    query.descending("createdAt");
+    query.find({
+        success: drawCommentsTable,
+        error: drawCommentsError
+    });
+    currentPage++;
+</pre>
+
+<h2><a href="http://kinvey.com">Kinvey</a> 예제</h2>
+<ul>
+<li><a href="kinvey" rel="external">단순조회</a></li>
+<li><a href="kinvey/index2.html" rel="external"></a></li>
+<li><a href="kinvey/write.html" rel="external"></a></li> 
+</ul>
 <pre class="prettyprint">
 var promise = Kinvey.init({
   appKey : 'kid_WkVVFh1N5',
@@ -205,12 +260,12 @@ var promise = Kinvey.DataStore.find('Comments', null, {
 });
 </pre>
 
-	<h2>Microsoft <a href="http://azure.com">Azure Mobile Services</a> 예제</h2>
-    <ul>
-    <li><a href="azure" rel="external">단순조회</a></li>
-    <li><a href="azure/index2.html" rel="external"></a></li> 
-    <li><a href="azure/write.html" rel="external"></a></li> 
-    </ul>
+<h2>Microsoft <a href="http://azure.com">Azure Mobile Services</a> 예제</h2>
+<ul>
+<li><a href="azure" rel="external">단순조회</a></li>
+<li><a href="azure/index2.html" rel="external"></a></li> 
+<li><a href="azure/write.html" rel="external"></a></li> 
+</ul>
 <pre class="prettyprint">
 var client = new WindowsAzure.MobileServiceClient('https://nextlayer.azure-mobile.net/', 'tIBCRAuvMqKAojuCYMmbqUdLzKSrNw70');
 var commentsItemTable = client.getTable('Comments');
@@ -223,13 +278,14 @@ query.read().then(function(commentsItems) {
   $('#commentsTable').empty().append(listItems).toggle(listItems.length > 0);
 }, handleError);
 </pre>
+<p>Azure Mobile Services 예제 새로 만든 것 <a href="azurenew">여기</a></p>
 
-	<h2>SKTelecom <a href="http://developer.sktelecom.com">T developers</a> BaaS 예제</h2>
-    <ul>
-    <li><a href="sktdevbaas" rel="external">단순조회</a></li>
-    <li><a href="sktdevbaas/index2.html" rel="external">조회+더보기</a></li> 
-    <li><a href="sktdevbaas/write.html" rel="external">쓰기</a></li> 
-    </ul>
+<h2>SKTelecom <a href="http://developer.sktelecom.com">T developers</a> BaaS 예제</h2>
+<ul>
+<li><a href="sktdevbaas" rel="external">단순조회</a></li>
+<li><a href="sktdevbaas/index2.html" rel="external">조회+더보기</a></li> 
+<li><a href="sktdevbaas/write.html" rel="external">쓰기</a></li> 
+</ul>
 <pre class="prettyprint">
 Baas.initialize("7dab9da0-9541-4c63-9c6a-452c02ba957a");
 var query = new Baas.Query('Comments');
@@ -266,26 +322,57 @@ query.find({
   data-show-faces="true">
 </div>
 
-    <script type="text/javascript" 
-        src="http://scr.nsmartad.com/admixer/admixer.js"></script>
-    <script type="text/javascript">
-        new admixer_ad({
-        admixer_key:"8ch8bwvi",
-        display_id:"admixer_display",
-        adsense_publisher_key:"ca-mb-pub-0000000000000000", //AdSense 사용시에만 필요
-        ad_change:true,  //default : true
-        test : false,    //default : false
-        test_display_id : "log"
-    });
-    </script>
-    <center>
-    <div id="admixer_display"></div>
-    </center>
-    <div id="log"></div>
+</div> <!-- end of mainpage -->
+
+<footer class="container-fluid text-center">
+  <p><a href="http://youre.space/">YOU'RE SPACE</a><br />
+  너의 공간
+  </p>
+
+  <center>
+  <script type="text/javascript">
+  //interstitial ad
+  clicksor_enable_inter = false; clicksor_maxad = -1; clicksor_hourcap = -1; clicksor_showcap = 2; clicksor_enable_adhere = false;
+  //default pop-under house ad url
+  clicksor_enable_pop = false; clicksor_frequencyCap = -1; durl = '';
+  clicksor_enable_layer_pop = false; clicksor_mobile_redirect = false;
+  //default banner house ad url 
+  clicksor_default_url = 'http://creative.clicksor.com/pub_default_ads/330835_1/1_562543_7_d.htm';
+  clicksor_banner_border = '#000000'; clicksor_banner_ad_bg = '#FFFFFF';
+  clicksor_banner_link_color = '#000000'; clicksor_banner_text_color = '#666666';
+  clicksor_banner_image_banner = true; clicksor_banner_text_banner = true;
+  clicksor_layer_border_color = '#000000';
+  clicksor_layer_ad_bg = '#FFFFFF'; clicksor_layer_ad_link_color = '#000000';
+  clicksor_layer_ad_text_color = '#666666'; clicksor_text_link_bg = '';
+  clicksor_text_link_color = ''; clicksor_enable_text_link = false;
+  clicksor_layer_banner = false;
+  </script>
+  <script type="text/javascript" src="http://b.yu0123456.com/show.php?nid=1&amp;pid=330835&amp;adtype=7&amp;sid=562543"></script>
+  </center>
+
+  <script type="text/javascript" src="http://scr.nsmartad.com/admixer/admixer.js"></script>
+  <script type="text/javascript">
+      new admixer_ad({
+      admixer_key:"8ch8bwvi",
+      display_id:"admixer_display",
+      adsense_publisher_key:"ca-mb-pub-0000000000000000", //AdSense 사용시에만 필요
+      ad_change:true,  //default : true
+      test : false,    //default : false
+      test_display_id : "log"
+  });
+  </script>
+  <center> <div id="admixer_display"></div> </center>
+
+  <center>
+  <div class="main_banner" id="main_banner1">
+    <script type="text/javascript"> var tad_conf = { targetId : 'main_banner1', clientId : 'MX00048A1', slotNo : 2 }; </script>
+    <script type="text/javascript" src="http://adddn.adotsolution.com/contents/sdk/js/tad.min.js"></script>
   </div>
-</div>
+  </center>
+</footer>
+
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-<pre class="prettyprint">
-</pre>
+<!-- <pre class="prettyprint"> </pre> -->
+<!-- <script> // trackJs.track('ahoy trackjs!'); </script> -->
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>오늘의 좋은 말 - 블로그</title>
@@ -8,13 +8,11 @@
 <link rel="stylesheet" href="https://milligram.github.io/css/milligram.min.css">
 <style>
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
-:lang(ko) {
-	font-family: 'Noto Sans KR', sans-serif;
-} 
+:lang(ko) { font-family: 'Noto Sans KR', sans-serif; } 
 </style>
 </head>
 
-<body>
+<body lang="ko">
 <h1>오늘의 좋은 말 - kinvey</h1>
 <h2>able</h2>
 <p>가능하다는 생각만으로도 기분이 좋아집니다. 이 부분은 블로그 본문입니다. 아래 댓글 목록이 표시됩니다. 더 보기, 삭제 없이 단순히 최신 댓글 몇개를 가져옵니다.</p>
@@ -26,42 +24,85 @@
 </tbody>
 </table>
 
+<button id='more'>more</button>
+<button id='write'>write</button>
 
 <script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
-<script src="//da189i1jfloii.cloudfront.net/js/kinvey-html5-1.6.9.min.js"></script>
+<!-- script src="//da189i1jfloii.cloudfront.net/js/kinvey-html5-1.6.9.min.js"></script -->
+<script src="https://da189i1jfloii.cloudfront.net/js/kinvey-html5-sdk-3.0.3.min.js"></script>
 <script>
-(function(){
 
+var pgCount=5;
+var currentPage=0;
+var commentEntries;
+
+$(document).ready(function() {
     var promise = Kinvey.init({
         appKey : 'kid_WkVVFh1N5',
         appSecret : '8ffb767dda014827bd9de4ea01df7a32'
     });
-    promise.then(function(activeUser) {
-        if(null === activeUser) {
-            return Kinvey.User.create();
-        }
-        console.log(activeUser._id + ' : ' + activeUser.username);
-        getComments();
-    
-        /*
-        var promise1 = Kinvey.ping();
-        promise1.then(function(response) {
-           console.log('Kinvey Ping Success. Kinvey Service is alive, version: ' 
-                       + response.version + ', response: ' + response.kinvey);
-        }, function(error) {
-            console.log('Kinvey Ping Failed. Response: ' + error.description);
-        });
-        */
-    }, function(error) {
-        console.log(error.description.toString());
+
+/*
+    var promise = Kinvey.ping().then(function(response) {
+      console.log('Kinvey Ping Success. Kinvey Service is alive, version: ' + response.version + ', response: ' + response.kinvey);
+    }).catch(function(error) {
+      console.log('Kinvey Ping Failed. Response: ' + error.description);
     });
-}());
+*/
+
+    var promise = new Kinvey.Promise(function(resolve) {
+      resolve(Kinvey.User.getActiveUser());
+    }).then(function onSuccess(user){
+      if(user){
+        console.log(user.username);
+      }else{
+        var promise = Kinvey.User.signup().then(function onSuccess(user) {
+          console.log(user.username);
+        }).catch(function onError(error) {
+          console.log(error.message);
+        });
+      }
+      getComments();
+    }).catch(function onError(error){
+      console.log(error.message);
+    });
+});
 
 function getComments(){
+    console.log('1');
+    var dataStore = Kinvey.DataStore.collection('Comments');
+    var query = new Kinvey.Query();
+/*
+    console.log(query);
+    query.ascending('name');
+*/
+    query.limit = pgCount ;
+    query.skip = pgCount*currentPage;
+
+    console.log('pgCount: ' + pgCount + ', ' + 'currentPage: ' + currentPage);
+    console.log('limit: ' + pgCount + ', ' + 'skipt: ' + pgCount*currentPage);
+
+    var stream = dataStore.find();
+    stream.subscribe(function onNext(entities) {
+      // here exec twice, not expected
+      if(commentEntries || entities){
+        console.log(entities);
+        commentEntries=entities;
+      }
+    }, function onError(error) {
+      drawCommentsError();
+    }, function onComplete() {
+      currentPage++;
+      drawCommentsTable(commentEntries);
+      commentEntries='';
+    });
+/*
+    Kinvey JS SDK v1.x 
     var promise = Kinvey.DataStore.find('Comments', null, {
         success: drawCommentsTable,
         error : drawCommentsError
     });
+*/
 }
 
 function drawCommentsTable(results){
@@ -90,6 +131,15 @@ function drawCommentsError(data){
     row.append($("<td>-</td>"));
     $("#commentsTable").append(row); 
 }
+
+$('#more').click(function(){
+  console.log('get more entities');
+  getComments();
+});
+
+$('#write').click(function(){
+    window.location.href = 'write.html';
+});
 
 </script>
 

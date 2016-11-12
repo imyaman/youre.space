@@ -1,17 +1,21 @@
 <!doctype html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<title>허니버터칩 - FoodGuide(가공식품 성분조회)</title>
-<meta name="description" content="My Baas App">
+<title>블로그</title>
+<meta name="description" content="오늘의 좋은 말을 이야기 하는 블로그입니다. 댓글을 작성해봅시다.">
 <meta name="viewport" content="width=device-width">
-<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="js/underscore.js"></script>
-<script type="text/javascript" src="js/sktdevbaas-0.9.0.js"></script>
+<link rel="stylesheet" href="https://milligram.github.io/css/milligram.min.css">
+<style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+:lang(ko) { font-family: 'Noto Sans KR', sans-serif; } 
+</style>
 </head>
 
-<body>
-<h1>FoodGuide</h1>
-<h2>허니버터칩</h2>
+<body lang="ko">
+<h1>블로그</h1>
+<p>여기에 블로그 글이 있다고 생각해봅시다.</p>
+<h2>댓글</h2>
 <h3>댓글 작성</h3>
 
 <form id="postComment">
@@ -23,26 +27,67 @@
 
 <button id="list">list</button>
 
+
+<script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
+<script src="https://da189i1jfloii.cloudfront.net/js/kinvey-html5-sdk-3.0.3.min.js"></script>
 <script>
 
+var pgCount=5;
+var currentPage=0;
+var commentEntries;
+
 $(document).ready(function() {
-    Baas.initialize("7dab9da0-9541-4c63-9c6a-452c02ba957a");
+    var promise = Kinvey.init({
+        appKey : 'kid_WkVVFh1N5',
+        appSecret : '8ffb767dda014827bd9de4ea01df7a32'
+    });
+    var promise = new Kinvey.Promise(function(resolve) {
+      resolve(Kinvey.User.getActiveUser());
+    }).then(function onSuccess(user){
+      if(user){
+        console.log(user.username);
+      }else{
+        var promise = Kinvey.User.signup().then(function onSuccess(user) {
+          console.log(user.username);
+        }).catch(function onError(error) {
+          console.log(error.message);
+        });
+      }
+    }).catch(function onError(error){
+      console.log(error.message);
+    });
 });
 
 $("#btnSaveObject").click(function() {
-        var comment = $('#comment').val();
-        var name = $('#name').val();
-        var pw = $('#simplepw').val();
+    var comment = $('#comment').val();
+    var name = $('#name').val();
+    var pw = $('#simplepw').val();
 
-        var Comment = new Baas.Object.extend("Comments");
-        var myComment = new Comment();
-        myComment.set("comment", comment);
-        myComment.set("name", name);
-        myComment.set("simplepw", pw);
-        myComment.save(null, {
-            success: alertSuccess,
-            error: alertError
-        });
+
+    var dataStore = Kinvey.DataStore.collection('Comments');
+    var promise = dataStore.save({
+      comment: comment,
+      name: name,
+      simplepw: pw,
+    }).then(function onSuccess(entity) {
+      alert('The comment is saved');
+      window.location.href='index.html';
+    }).catch(function onError(error) {
+      console.log(error.message); 
+    });
+
+
+/*
+    var Comment = new Baas.Object.extend("Comments");
+    var myComment = new Comment();
+    myComment.set("comment", comment);
+    myComment.set("name", name);
+    myComment.set("simplepw", pw);
+    myComment.save(null, {
+        success: alertSuccess,
+        error: alertError
+    });
+*/
 
 });
 
@@ -55,10 +100,9 @@ function alertError(data){
 }
 
 $('#list').click(function(){
-    window.location.href='index.long.delete.html';
+    window.location.href='index.html';
 });
          
 </script>
-
 </body>
 </html>
