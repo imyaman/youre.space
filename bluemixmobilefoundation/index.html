@@ -27,6 +27,20 @@
 <script src="//code.jquery.com/jquery-latest.min.js"></script>
 <script src="ibmmfpf.js"></script>
 <script src="ibmmfpfanalytics.js"></script>
+<script>
+var wlInitOptions = {
+    mfpContextRoot : '/mfp', // "mfp" is the default context root in the MobileFirst Development server
+    applicationId : 'co.sys5.mf.web' // Replace with your own value.
+};
+
+WL.Client.init(wlInitOptions).then (
+    function() {
+        console.log('MobileFirst web SDK initialized');
+        // Application logic.
+});
+
+ibmmfpfanalytics.autoSendLogs(true);
+</script>
 
 </body>
 </html>
