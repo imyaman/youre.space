@@ -1,15 +1,37 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "name": "5 mins",
   "description": "3 cups of coffee a day",
-  "launch_path": "/frenchpress-timer/index.html",
-  "icons": {
-    "48": "/frenchpress-timer/icons/mdpi.png",
-    "128": "/frenchpress-timer/icons/128x128_stretch_iTunesArtwork.png",
-    "192": "/frenchpress-timer/icons/xxxhdpi.png",
-    "256": "/frenchpress-timer/icons/256x256_stretch_iTunesArtwork.png",
-    "512": "/frenchpress-timer/icons/GooglePlayStore.png"
-  },
+  "start_url": "/frenchpress-timer/index.html",
+  "theme_color": "aliceblue",
+  "background_color": "blue",
+  "icons": [
+    {
+    "sizes": "48",
+    "src": "/frenchpress-timer/icons/mdpi.png",
+    "type": "image/png"
+    },
+    {
+    "sizes": "128",
+    "src": "/frenchpress-timer/icons/128x128_stretch_iTunesArtwork.png",
+    "type": "image/png"
+    },
+    {
+    "sizes": "192",
+    "src": "/frenchpress-timer/icons/xxxhdpi.png",
+    "type": "image/png"
+    },
+    {
+    "sizes": "256",
+    "src": "/frenchpress-timer/icons/256x256_stretch_iTunesArtwork.png",
+    "type": "image/png"
+    },
+    {
+    "sizes": "512",
+    "src": "/frenchpress-timer/icons/GooglePlayStore.png"
+    "type": "image/png"
+    }
+  ],
   "developer": {
     "name": "Sangyong Gwak",
     "url": "http://youre.space/"
