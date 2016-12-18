@@ -1,3 +1,0 @@
-CACHE MANIFEST
-/frenchpress-timer/index.html
-/frenchpress-timer/build/app.js
