@@ -1,3 +1,3 @@
 CACHE MANIFEST
-/index.html
-/build/app.js
+index.html
+build/app.js
