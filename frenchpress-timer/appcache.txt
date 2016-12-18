@@ -1,3 +1,3 @@
 CACHE MANIFEST
-index.html
-build/app.js
+/frenchpress-timer/index.html
+/frenchpress-timer/build/app.js
