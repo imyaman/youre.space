@@ -341,15 +341,15 @@ query.find({
   <script type="text/javascript" src="http://adddn.adotsolution.com/contents/sdk/js/tad.min.js"></script>
   <div class="main_banner" id="main_banner">
   <script type="text/javascript">
-  var tad_slot2_conf = {
-      slotNo : 2, targetId : 'main_banner', clientId : 'MX00048A1', newWindow : false, test : false, 
+  var tad_slot_conf = {
+      slotNo : 3, targetId : 'main_banner', clientId : 'MX00048A1', newWindow : true, test : false, 
       errorCallback : function(errorCode) {
           if(errorCode == 0) { // No Ad. 에러 처리 및 다른 광고 플랫폼 호출
           } else if(errorCode == 1) { // Frequency Over. 에러 처리 및 다른 광고 플랫폼 호출
           }
       }
   };
-  TadSdk.AdView.init(tad_slot2_conf);
+  TadSdk.AdView.init(tad_slot_conf);
   </script>
   </div>
   </center>
