@@ -9,7 +9,8 @@
 <title>Parse Server 데이터 조회</title>
 <meta name="description" content="Parse Server JavaScript SDK 이용 데이터 조회 예제">
 <meta name="viewport" content="width=device-width">
-<link rel="stylesheet" href="https://milligram.github.io/bower_components/milligram/dist/milligram.min.css">
+<!-- link rel="stylesheet" href="https://milligram.github.io/bower_components/milligram/dist/milligram.min.css" -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css">
 <style>
   @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
   :lang(ko) { font-family: 'Noto Sans KR', sans-serif; } 
@@ -37,10 +38,9 @@
 </div>
 </center>
 
-</body>
 
-<script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
-<script src="//www.parsecdn.com/js/parse-latest.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/parse/1.9.2/parse.min.js"></script>
 <script>
 var pgCount=5;
 var currentPage=0;
@@ -113,6 +113,7 @@ function deleteComment(cid){
         } 
     });
 }
-
 </script>
+
+</body>
 </html>
